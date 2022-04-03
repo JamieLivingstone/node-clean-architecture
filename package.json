@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json",
-    "start": "tsnd --respawn --exit-child -r dotenv/config -r tsconfig-paths/register src/web/server.ts",
+    "start": "tsnd --respawn --exit-child -r dotenv/config -r tsconfig-paths/register src/web/api/server.ts",
     "test": "jest"
   },
   "dependencies": {
+    "@prisma/client": "^3.11.1",
     "awilix": "^7.0.1",
     "express": "^4.17.3",
     "helmet": "^5.0.2",
@@ -20,6 +21,7 @@
     "dotenv": "^16.0.0",
     "jest": "^27.5.1",
     "prettier": "^2.6.2",
+    "prisma": "^3.11.1",
     "ts-jest": "^27.1.4",
     "ts-node-dev": "^1.1.8",
     "tsc-alias": "^1.6.5",
