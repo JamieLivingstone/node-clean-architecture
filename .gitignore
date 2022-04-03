@@ -1,0 +1,10 @@
+node_modules/
+dist/
+coverage/
+yarn-error.log
+yarn-debug.log
+.env
+
+# Editor files
+.idea/
+.vscode/
