@@ -1,0 +1,100 @@
+import { mockDeep } from 'jest-mock-extended';
+import { PrismaClient } from '@prisma/client';
+import { makePostsRepository } from '../posts-repository';
+import { Post } from '@domain/entities';
+
+describe('postsRepository', () => {
+  function setup() {
+    const db = mockDeep<PrismaClient>();
+
+    const postsRepository = makePostsRepository({
+      db,
+    });
+
+    return {
+      db,
+      postsRepository,
+    };
+  }
+
+  describe('create', () => {
+    test('creates post and returns the id', async () => {
+      const { db, postsRepository } = setup();
+
+      db.post.create.mockResolvedValue({
+        id: 1,
+        createdAt: new Date(2022, 1, 1),
+        title: 'Mock title',
+        published: true,
+      });
+
+      const result = await postsRepository.create({
+        post: new Post({
+          createdAt: new Date(2022, 1, 1),
+          title: 'Mock title',
+          published: true,
+        }),
+      });
+
+      expect(result.id).toEqual(1);
+      expect(db.post.create).toHaveBeenCalledTimes(1);
+      expect(db.post.create.mock.calls[0]).toMatchSnapshot();
+    });
+  });
+
+  describe('delete', () => {
+    test('deletes post', async () => {
+      const { db, postsRepository } = setup();
+
+      await postsRepository.delete({ postId: 1 });
+
+      expect(db.post.delete).toBeCalledTimes(1);
+      expect(db.post.delete.mock.calls[0]).toMatchSnapshot();
+    });
+  });
+
+  describe('getById', () => {
+    test('returns null if the post does not exist', async () => {
+      const { db, postsRepository } = setup();
+
+      const result = await postsRepository.getById({ postId: 1 });
+
+      expect(result).toBeNull();
+      expect(db.post.findFirst).toHaveBeenCalledTimes(1);
+      expect(db.post.findFirst.mock.calls[0]).toMatchSnapshot();
+    });
+
+    test('returns post if it exists', async () => {
+      const { db, postsRepository } = setup();
+
+      db.post.findFirst.mockResolvedValue({
+        id: 1,
+        createdAt: new Date(2022, 1, 1),
+        title: 'Mock title',
+        published: true,
+      });
+
+      const result = await postsRepository.getById({ postId: 1 });
+
+      expect(result).toMatchSnapshot();
+    });
+  });
+
+  describe('update', () => {
+    test('updates post', async () => {
+      const { db, postsRepository } = setup();
+
+      await postsRepository.update({
+        post: new Post({
+          id: 1,
+          createdAt: new Date(2022, 1, 1),
+          title: 'Mock title',
+          published: true,
+        }),
+      });
+
+      expect(db.post.update).toHaveBeenCalledTimes(1);
+      expect(db.post.update.mock.calls[0]).toMatchSnapshot();
+    });
+  });
+});
