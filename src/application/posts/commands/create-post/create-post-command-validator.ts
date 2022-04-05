@@ -6,7 +6,7 @@ export async function validate(command: CreatePostCommand) {
   try {
     const schema: Yup.SchemaOf<CreatePostCommand> = Yup.object().shape({
       published: Yup.boolean().required(),
-      title: Yup.string().min(1).required(),
+      title: Yup.string().required(),
     });
 
     await schema.validate(command, { abortEarly: false });

@@ -32,7 +32,7 @@ describe('createPostCommand', () => {
 
       const result = createPostCommand({
         published: true,
-        title: '', // Requires a minimum of one character
+        title: '', // Cannot be empty
       });
 
       await expect(result).rejects.toThrow(ValidationException);

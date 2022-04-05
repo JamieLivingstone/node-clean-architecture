@@ -20,6 +20,9 @@ export function makeHandleException() {
       case Exceptions.NotFoundException:
         exception = notFoundExceptionResponse(error);
         break;
+      case Exceptions.ValidationException:
+        exception = validationExceptionResponse(error as Exceptions.ValidationException);
+        break;
       default:
         exception = internalServerException();
     }
@@ -33,7 +36,7 @@ function badRequestExceptionResponse({ message }: Exceptions.BadRequestException
     ...(message && { detail: message }),
     status: 400,
     title: 'The request was invalid',
-    type: 'https://tools.ietf.org/html/rfc7231#section-6.5.4',
+    type: 'https://tools.ietf.org/html/rfc7231#section-6.5.1',
   };
 }
 
@@ -51,5 +54,15 @@ function internalServerException(): ExceptionResponse {
     status: 500,
     title: 'An error occurred while processing your request',
     type: 'https://tools.ietf.org/html/rfc7231#section-6.6.1',
+  };
+}
+
+function validationExceptionResponse(error: Exceptions.ValidationException): ExceptionResponse {
+  return {
+    ...(error.message && { detail: error.message }),
+    errors: error.errors,
+    status: 400,
+    title: 'The request was invalid',
+    type: 'https://tools.ietf.org/html/rfc7231#section-6.5.1',
   };
 }
