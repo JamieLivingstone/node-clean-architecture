@@ -36,7 +36,7 @@ exports[`postsRepository getById returns post if it exists 1`] = `
 Post {
   "createdAt": 2022-02-01T00:00:00.000Z,
   "id": 1,
-  "published": false,
+  "published": true,
   "title": "Mock title",
 }
 `;

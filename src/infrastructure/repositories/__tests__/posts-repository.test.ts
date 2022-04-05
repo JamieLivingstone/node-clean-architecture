@@ -24,15 +24,15 @@ describe('postsRepository', () => {
       db.post.create.mockResolvedValue({
         id: 1,
         createdAt: new Date(2022, 1, 1),
-        title: 'Mock title',
         published: true,
+        title: 'Mock title',
       });
 
       const result = await postsRepository.create({
         post: new Post({
           createdAt: new Date(2022, 1, 1),
-          title: 'Mock title',
           published: true,
+          title: 'Mock title',
         }),
       });
 
@@ -70,8 +70,8 @@ describe('postsRepository', () => {
       db.post.findFirst.mockResolvedValue({
         id: 1,
         createdAt: new Date(2022, 1, 1),
-        title: 'Mock title',
         published: true,
+        title: 'Mock title',
       });
 
       const result = await postsRepository.getById({ postId: 1 });
@@ -88,8 +88,8 @@ describe('postsRepository', () => {
         post: new Post({
           id: 1,
           createdAt: new Date(2022, 1, 1),
-          title: 'Mock title',
           published: true,
+          title: 'Mock title',
         }),
       });
 

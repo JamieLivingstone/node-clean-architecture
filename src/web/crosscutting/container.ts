@@ -1,8 +1,8 @@
-import { createContainer, Resolver } from 'awilix';
+import { createContainer } from 'awilix';
 import { makeInfrastructure, Dependencies as InfrastructureDependencies } from '@infrastructure/di';
 import { makeApplication, Dependencies as ApplicationDependencies } from '@application/di';
 
-export type Dependencies = InfrastructureDependencies & ApplicationDependencies;
+export type Dependencies = Pick<InfrastructureDependencies, 'logger'> & ApplicationDependencies;
 
 export function makeContainer() {
   const container = createContainer();

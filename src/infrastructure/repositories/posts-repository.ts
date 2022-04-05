@@ -8,8 +8,8 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
       const { id } = await db.post.create({
         data: {
           createdAt: post.createdAt,
-          title: post.title,
           published: post.published,
+          title: post.title,
         },
       });
 
@@ -30,8 +30,8 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
       return new Post({
         id: post.id,
         createdAt: post.createdAt,
+        published: post.published,
         title: post.title,
-        published: false,
       });
     },
     async update({ post }) {
@@ -41,8 +41,8 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
         },
         data: {
           createdAt: post.createdAt,
-          title: post.title,
           published: post.published,
+          title: post.title,
         },
       });
     },
