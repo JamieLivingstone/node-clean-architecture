@@ -14,5 +14,3 @@ export function makeContainer() {
 
   return container.cradle as Dependencies;
 }
-
-export const dependencies = makeContainer();
