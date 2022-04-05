@@ -2,10 +2,10 @@ import { Dependencies } from '@infrastructure/di';
 import { Post } from '@domain/entities';
 import { validate } from './create-post-command-validator';
 
-export type CreatePostCommand = {
+export type CreatePostCommand = Readonly<{
   published: boolean;
   title: string;
-};
+}>;
 
 export function makeCreatePostCommand({ postsRepository }: Pick<Dependencies, 'postsRepository'>) {
   return async function createPostCommand(command: CreatePostCommand) {

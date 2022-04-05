@@ -3,7 +3,7 @@ import { Dependencies } from '@web/crosscutting/container';
 import * as controllers from './controllers';
 import * as middlewares from './middlewares';
 
-export function makeApplication(dependencies: Dependencies) {
+export function makeApp(dependencies: Dependencies) {
   const app = express();
 
   middlewares.onRequest(app);
