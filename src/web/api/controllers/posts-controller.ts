@@ -12,5 +12,15 @@ export function postsController({ dependencies, router }: { dependencies: Depend
     }
   });
 
+  router.delete('/api/v1/posts/:id', async function deletePost(request, response, next) {
+    try {
+      await dependencies.posts.commands.deletePost({ id: Number(request.params.id) });
+
+      return response.status(200).json({});
+    } catch (error) {
+      return next(error);
+    }
+  });
+
   return router;
 }

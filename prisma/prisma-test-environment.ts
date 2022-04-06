@@ -1,8 +1,9 @@
 import { randomUUID } from 'crypto';
 import { execSync } from 'child_process';
-const { Client } = require('pg');
+import { Client } from 'pg';
 import { Config } from '@jest/types';
 import NodeEnvironment from 'jest-environment-node';
+import { initializeDbForTests } from '../tests/api/seed';
 
 export default class PrismaTestEnvironment extends NodeEnvironment {
   private readonly schema: string;
@@ -18,6 +19,7 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
     process.env.DATABASE_URL = this.connectionString;
     this.global.process.env.DATABASE_URL = this.connectionString;
     execSync(`npx prisma migrate deploy`, { stdio: 'ignore' });
+    await initializeDbForTests();
 
     return super.setup();
   }
@@ -31,5 +33,3 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
     return super.teardown();
   }
 }
-
-module.exports = PrismaTestEnvironment;

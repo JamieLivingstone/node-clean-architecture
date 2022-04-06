@@ -17,11 +17,11 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
         id,
       };
     },
-    async delete({ postId }) {
-      await db.post.delete({ where: { id: postId } });
+    async delete({ id }) {
+      await db.post.delete({ where: { id } });
     },
-    async getById({ postId }) {
-      const post = await db.post.findFirst({ where: { id: postId } });
+    async getById({ id }) {
+      const post = await db.post.findFirst({ where: { id } });
 
       if (!post) {
         return null;

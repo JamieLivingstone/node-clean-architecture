@@ -46,7 +46,7 @@ describe('postsRepository', () => {
     test('deletes post', async () => {
       const { db, postsRepository } = setup();
 
-      await postsRepository.delete({ postId: 1 });
+      await postsRepository.delete({ id: 1 });
 
       expect(db.post.delete).toBeCalledTimes(1);
       expect(db.post.delete.mock.calls[0]).toMatchSnapshot();
@@ -57,7 +57,7 @@ describe('postsRepository', () => {
     test('returns null if the post does not exist', async () => {
       const { db, postsRepository } = setup();
 
-      const result = await postsRepository.getById({ postId: 1 });
+      const result = await postsRepository.getById({ id: 1 });
 
       expect(result).toBeNull();
       expect(db.post.findFirst).toHaveBeenCalledTimes(1);
@@ -74,7 +74,7 @@ describe('postsRepository', () => {
         title: 'Mock title',
       });
 
-      const result = await postsRepository.getById({ postId: 1 });
+      const result = await postsRepository.getById({ id: 1 });
 
       expect(result).toMatchSnapshot();
     });
