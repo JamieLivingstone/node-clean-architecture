@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import * as Exceptions from '@application/common/exceptions';
+import { Dependencies } from '@web/crosscutting/container';
 
 type ExceptionResponse = {
   detail?: string; // A human-readable explanation specific to this occurrence of the problem.
@@ -9,7 +10,7 @@ type ExceptionResponse = {
   type: string; // A URI reference that identifies the problem type. (https://datatracker.ietf.org/doc/html/rfc7231)
 };
 
-export function makeHandleException() {
+export function makeHandleException({ logger }: Pick<Dependencies, 'logger'>) {
   return function handler(error: Error, request: Request, response: Response, _: NextFunction) {
     let exception: ExceptionResponse | null = null;
 
@@ -26,6 +27,11 @@ export function makeHandleException() {
       default:
         exception = internalServerException();
     }
+
+    logger.error({
+      detail: `Handling exception`,
+      message: error.message,
+    });
 
     return response.status(exception.status).json(exception);
   };

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "start": "tsnd --respawn --exit-child -r dotenv/config -r tsconfig-paths/register src/web/api/server.ts",
-    "test": "jest --maxWorkers=50%"
+    "test": "jest"
   },
   "dependencies": {
     "@prisma/client": "^3.11.1",

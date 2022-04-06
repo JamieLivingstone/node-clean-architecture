@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GET /api/v1/posts/:id given a valid request responds with a 200 status code 1`] = `
+Object {
+  "id": 1,
+  "published": false,
+  "title": "Mock post one",
+}
+`;

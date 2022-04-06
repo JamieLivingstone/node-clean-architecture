@@ -65,7 +65,7 @@
           {
             "name": "id",
             "in": "path",
-            "description": "The ID of the porst to delete",
+            "description": "The ID of the post to delete",
             "required": true,
             "schema": {
               "type": "number"
@@ -89,6 +89,56 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The post does not exist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Get a post",
+        "tags": ["Posts"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the post to retrieve",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved post",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": "1"
+                    },
+                    "published": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Example post"
+                    }
+                  }
                 }
               }
             }

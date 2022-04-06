@@ -22,5 +22,15 @@ export function postsController({ dependencies, router }: { dependencies: Depend
     }
   });
 
+  router.get('/api/v1/posts/:id', async function getPost(request, response, next) {
+    try {
+      const result = await dependencies.posts.queries.getPost({ id: Number(request.params.id) });
+
+      return response.status(200).json(result);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
   return router;
 }

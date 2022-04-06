@@ -6,11 +6,11 @@ import * as middlewares from './middlewares';
 export function makeApp(dependencies: Dependencies) {
   const app = express();
 
-  middlewares.onRequest(app);
+  middlewares.onRequest({ app });
 
   app.use(controllers.postsController({ dependencies, router: express.Router() }));
 
-  middlewares.onResponse(app);
+  middlewares.onResponse({ app, dependencies });
 
   return app;
 }
