@@ -1,31 +1,29 @@
-import { client } from '../../client';
-import { CreatePostCommand } from '@application/posts/commands/create-post';
+import { client } from '../..';
 
 describe('POST /api/v1/posts', () => {
   describe('given an invalid request', () => {
     test('responds with a 400 status code', async () => {
-      const payload: CreatePostCommand = {
+      const response = await client.post('/api/v1/posts').send({
         published: true,
         title: '', // Cannot be empty
-      };
-
-      const response = await client.post('/api/v1/posts').send(payload);
+      });
 
       expect(response.status).toEqual(400);
     });
   });
 
   describe('given a valid request', () => {
-    test('responds with a 201 status code', async () => {
-      const payload: CreatePostCommand = {
+    test('creates post and responds with a 201 status code', async () => {
+      const createResponse = await client.post('/api/v1/posts').send({
         published: true,
         title: 'Example post',
-      };
+      });
 
-      const response = await client.post('/api/v1/posts').send(payload);
+      const getResponse = await client.get(`/api/v1/posts/${createResponse.body.id}`);
 
-      expect(response.status).toEqual(201);
-      expect(response.body).toMatchSnapshot({ id: expect.any(Number) });
+      expect(createResponse.status).toEqual(201);
+      expect(createResponse.body).toMatchSnapshot({ id: expect.any(Number) });
+      expect(getResponse.status).toEqual(200);
     });
   });
 });

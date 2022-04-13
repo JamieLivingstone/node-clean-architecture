@@ -1,5 +1,4 @@
-import { client } from '../../client';
-import * as seed from '../../seed';
+import { client, seed } from '../..';
 
 describe('DELETE /api/v1/posts/:id', () => {
   describe('given an invalid request', () => {
@@ -23,12 +22,14 @@ describe('DELETE /api/v1/posts/:id', () => {
   });
 
   describe('given a valid request', () => {
-    test('responds with a 200 status code', async () => {
+    test('deletes post and responds with a 200 status code', async () => {
       const postId = seed.posts[0].id;
 
-      const response = await client.delete(`/api/v1/posts/${postId}`);
+      const createResponse = await client.delete(`/api/v1/posts/${postId}`);
+      const getResponse = await client.get(`/api/v1/posts/${postId}`);
 
-      expect(response.status).toEqual(200);
+      expect(createResponse.status).toEqual(200);
+      expect(getResponse.status).toEqual(404);
     });
   });
 });

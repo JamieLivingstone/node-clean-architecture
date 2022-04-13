@@ -1,5 +1,4 @@
-import { client } from '../../client';
-import * as seed from '../../seed';
+import { client, seed } from '../..';
 
 describe('GET /api/v1/posts/:id', () => {
   describe('given the post does not exist', () => {

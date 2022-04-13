@@ -32,5 +32,18 @@ export function postsController({ dependencies, router }: { dependencies: Depend
     }
   });
 
+  router.patch('/api/v1/posts/:id', async function updatePost(request, response, next) {
+    try {
+      await dependencies.posts.commands.updatePost({
+        id: Number(request.params.id),
+        ...request.body,
+      });
+
+      return response.status(200).json({});
+    } catch (error) {
+      return next(error);
+    }
+  });
+
   return router;
 }

@@ -15,9 +15,6 @@ export function makeHandleException({ logger }: Pick<Dependencies, 'logger'>) {
     let exception: ExceptionResponse | null = null;
 
     switch (error.constructor) {
-      case Exceptions.BadRequestException:
-        exception = badRequestExceptionResponse(error);
-        break;
       case Exceptions.NotFoundException:
         exception = notFoundExceptionResponse(error);
         break;
@@ -34,15 +31,6 @@ export function makeHandleException({ logger }: Pick<Dependencies, 'logger'>) {
     });
 
     return response.status(exception.status).json(exception);
-  };
-}
-
-function badRequestExceptionResponse({ message }: Exceptions.BadRequestException): ExceptionResponse {
-  return {
-    ...(message && { detail: message }),
-    status: 400,
-    title: 'The request was invalid',
-    type: 'https://tools.ietf.org/html/rfc7231#section-6.5.1',
   };
 }
 

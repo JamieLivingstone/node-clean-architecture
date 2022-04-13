@@ -8,7 +8,7 @@ export async function validate(command: DeletePostCommand) {
       id: Yup.number().positive().required(),
     });
 
-    await schema.validate(command, { abortEarly: false });
+    await schema.validate(command, { abortEarly: false, strict: true });
   } catch (error) {
     throw new ValidationException(error as Yup.ValidationError);
   }
