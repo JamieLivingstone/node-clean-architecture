@@ -1,3 +1,4 @@
+import { Post as PostModel } from '@prisma/client';
 import { IPostsRepository } from '@application/common/interfaces';
 import { Dependencies } from '@infrastructure/di';
 import { Post } from '@domain/entities';
@@ -27,12 +28,20 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
         return null;
       }
 
-      return new Post({
-        id: post.id,
-        createdAt: post.createdAt,
-        published: post.published,
-        title: post.title,
+      return toDto(post);
+    },
+    async list({ pageNumber, pageSize }) {
+      const count = await db.post.count();
+
+      const posts = await db.post.findMany({
+        skip: (pageNumber - 1) * pageSize,
+        take: pageSize,
       });
+
+      return {
+        count,
+        posts: posts.map(toDto),
+      };
     },
     async update({ post }) {
       await db.post.update({
@@ -47,4 +56,13 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
       });
     },
   };
+
+  function toDto(post: PostModel) {
+    return new Post({
+      id: post.id,
+      createdAt: post.createdAt,
+      published: post.published,
+      title: post.title,
+    });
+  }
 }

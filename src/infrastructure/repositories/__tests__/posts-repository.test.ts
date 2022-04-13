@@ -80,6 +80,35 @@ describe('postsRepository', () => {
     });
   });
 
+  describe('list', () => {
+    test('list posts', async () => {
+      const { db, postsRepository } = setup();
+
+      db.post.count.mockResolvedValue(2);
+
+      db.post.findMany.mockResolvedValue([
+        {
+          id: 1,
+          createdAt: new Date(2022, 1, 1),
+          published: true,
+          title: 'Mock post one',
+        },
+        {
+          id: 2,
+          createdAt: new Date(2022, 2, 1),
+          published: false,
+          title: 'Mock post two',
+        },
+      ]);
+
+      const result = await postsRepository.list({ pageNumber: 1, pageSize: 10 });
+
+      expect(db.post.findMany).toBeCalledTimes(1);
+      expect(db.post.findMany.mock.calls[0]).toMatchSnapshot();
+      expect(result).toMatchSnapshot();
+    });
+  });
+
   describe('update', () => {
     test('updates post', async () => {
       const { db, postsRepository } = setup();

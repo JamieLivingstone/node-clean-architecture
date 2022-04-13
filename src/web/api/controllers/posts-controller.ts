@@ -32,6 +32,19 @@ export function postsController({ dependencies, router }: { dependencies: Depend
     }
   });
 
+  router.get('/api/v1/posts', async function listPosts(request, response, next) {
+    try {
+      const result = await dependencies.posts.queries.listPosts({
+        pageNumber: Number(request.query.pageNumber ?? 1),
+        pageSize: Number(request.query.pageSize ?? 10),
+      });
+
+      return response.status(200).json(result);
+    } catch (error) {
+      return next(error);
+    }
+  });
+
   router.patch('/api/v1/posts/:id', async function updatePost(request, response, next) {
     try {
       await dependencies.posts.commands.updatePost({

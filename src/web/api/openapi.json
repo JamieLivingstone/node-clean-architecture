@@ -6,6 +6,99 @@
   },
   "paths": {
     "/api/v1/posts": {
+      "get": {
+        "description": "List posts",
+        "tags": ["Posts"],
+        "parameters": [
+          {
+            "name": "pageNumber",
+            "in": "query",
+            "description": "The current page number",
+            "required": true,
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The number of posts per page",
+            "required": true,
+            "example": 1,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "count": {
+                      "type": "number",
+                      "example": "3"
+                    },
+                    "hasPreviousPage": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "hasNextPage": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "pageNumber": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "pageSize": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "posts": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number",
+                            "example": 1
+                          },
+                          "published": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "title": {
+                            "type": "string",
+                            "example": "Example post title"
+                          }
+                        }
+                      }
+                    },
+                    "totalPages": {
+                      "type": "number",
+                      "example": 3
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The request was invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "description": "Create a new post",
         "tags": ["Posts"],

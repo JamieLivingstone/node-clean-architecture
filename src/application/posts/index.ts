@@ -3,6 +3,7 @@ import { makeCreatePostCommand } from './commands/create-post';
 import { makeDeletePostCommand } from './commands/delete-post';
 import { makeUpdatePostCommand } from './commands/update-post';
 import { makeGetPostQuery } from './queries/get-post';
+import { makeListPostQuery } from './queries/list-posts';
 
 export function makePosts(dependencies: Dependencies) {
   return {
@@ -13,6 +14,7 @@ export function makePosts(dependencies: Dependencies) {
     },
     queries: {
       getPost: makeGetPostQuery(dependencies),
+      listPosts: makeListPostQuery(dependencies),
     },
   };
 }

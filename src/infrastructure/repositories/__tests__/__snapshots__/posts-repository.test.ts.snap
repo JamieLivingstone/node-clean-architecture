@@ -1,57 +1,30 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`postsRepository create creates post and returns the id 1`] = `
+exports[`postsRepository list list posts 1`] = `
 Array [
   Object {
-    "data": Object {
+    "skip": 0,
+    "take": 10,
+  },
+]
+`;
+
+exports[`postsRepository list list posts 2`] = `
+Object {
+  "count": 2,
+  "posts": Array [
+    Post {
       "createdAt": 2022-02-01T00:00:00.000Z,
+      "id": 1,
       "published": true,
-      "title": "Mock title",
+      "title": "Mock post one",
     },
-  },
-]
-`;
-
-exports[`postsRepository delete deletes post 1`] = `
-Array [
-  Object {
-    "where": Object {
-      "id": 1,
+    Post {
+      "createdAt": 2022-03-01T00:00:00.000Z,
+      "id": 2,
+      "published": false,
+      "title": "Mock post two",
     },
-  },
-]
-`;
-
-exports[`postsRepository getById returns null if the post does not exist 1`] = `
-Array [
-  Object {
-    "where": Object {
-      "id": 1,
-    },
-  },
-]
-`;
-
-exports[`postsRepository getById returns post if it exists 1`] = `
-Post {
-  "createdAt": 2022-02-01T00:00:00.000Z,
-  "id": 1,
-  "published": true,
-  "title": "Mock title",
+  ],
 }
-`;
-
-exports[`postsRepository update updates post 1`] = `
-Array [
-  Object {
-    "data": Object {
-      "createdAt": 2022-02-01T00:00:00.000Z,
-      "published": true,
-      "title": "Mock title",
-    },
-    "where": Object {
-      "id": 1,
-    },
-  },
-]
 `;
