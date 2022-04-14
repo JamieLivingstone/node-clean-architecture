@@ -8,6 +8,8 @@
     "lint": "eslint .",
     "start": "tsnd --respawn --exit-child -r dotenv/config -r tsconfig-paths/register src/web/api/server.ts",
     "test": "jest",
+    "test:unit": "jest --selectProjects unit-tests",
+    "test:functional": "jest --selectProjects functional-tests",
     "prepare": "husky install"
   },
   "lint-staged": {
