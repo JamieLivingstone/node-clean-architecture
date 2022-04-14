@@ -7,7 +7,12 @@
     "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "lint": "eslint .",
     "start": "tsnd --respawn --exit-child -r dotenv/config -r tsconfig-paths/register src/web/api/server.ts",
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts}": "eslint --fix",
+    "*.{ts,js,json,md,yml}": "prettier --write"
   },
   "dependencies": {
     "@prisma/client": "^3.11.1",
@@ -28,8 +33,10 @@
     "@typescript-eslint/parser": "^5.19.0",
     "dotenv": "^16.0.0",
     "eslint": "^8.13.0",
+    "husky": ">=6",
     "jest": "^27.5.1",
     "jest-mock-extended": "^2.0.5",
+    "lint-staged": ">=10",
     "pg": "^8.7.3",
     "prettier": "^2.6.2",
     "prisma": "^3.11.1",
