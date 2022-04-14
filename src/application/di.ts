@@ -1,4 +1,4 @@
-import { asFunction, asValue, Resolver } from 'awilix';
+import { asFunction, Resolver } from 'awilix';
 import { makePosts } from './posts';
 
 export type Dependencies = {

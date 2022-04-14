@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import { Config } from '@jest/types';
 import { pathsToModuleNameMapper } from 'ts-jest';
-const { compilerOptions } = require('./tsconfig.json');
+import { compilerOptions } from './tsconfig.json';
 
 dotenv.config();
 
