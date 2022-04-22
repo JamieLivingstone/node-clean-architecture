@@ -1,6 +1,6 @@
 # Clean Architecture Template
 
-A Node template that follows the Clean Architecture principles and encourages good practices.
+A Node template that follows the Clean Architecture principles and encourages established practices.
 
 ## Features
 
