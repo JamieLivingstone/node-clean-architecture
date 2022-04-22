@@ -28,7 +28,7 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
         return null;
       }
 
-      return toDto(post);
+      return toEntity(post);
     },
     async list({ pageNumber, pageSize }) {
       const count = await db.post.count();
@@ -40,7 +40,7 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
 
       return {
         count,
-        posts: posts.map(toDto),
+        posts: posts.map(toEntity),
       };
     },
     async update({ post }) {
@@ -57,7 +57,7 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
     },
   };
 
-  function toDto(post: PostModel) {
+  function toEntity(post: PostModel) {
     return new Post({
       id: post.id,
       createdAt: post.createdAt,
