@@ -1,0 +1,33 @@
+name: Running Code Coverage
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
+
+      - name: Start container
+        run: docker-compose up -d
+
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Run tests
+        run: yarn test --coverage
+
+      - name: Stop container
+        run: docker-compose down
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2

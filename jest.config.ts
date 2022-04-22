@@ -3,7 +3,7 @@ import { Config } from '@jest/types';
 import { pathsToModuleNameMapper } from 'ts-jest';
 import { compilerOptions } from './tsconfig.json';
 
-dotenv.config();
+dotenv.config({ path: './.env.test' });
 
 function makeProject(options: Partial<Config.InitialOptions>): Config.InitialOptions {
   return {
