@@ -22,7 +22,7 @@
     "express": "^4.17.3",
     "helmet": "^5.0.2",
     "swagger-ui-express": "^4.3.0",
-    "winston": "^3.6.0",
+    "winston": "^3.7.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
