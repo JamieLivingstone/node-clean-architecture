@@ -1058,10 +1058,10 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
-awilix@^7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/awilix/-/awilix-7.0.1.tgz#8ec5e06a12266de4eb1ce804b401e4ab80067f32"
-  integrity sha512-ya9l28+Csj3pNguJEzK+JMuohL3GBB23wAW0V0dkVzI6WgtOA3kcnFOlhnBTFFMVSW4VQ3QWcHfZm8ABWZySUQ==
+awilix@^7.0.2:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/awilix/-/awilix-7.0.3.tgz#5afe8f7acb7cbf2ada5a6221dbdd3f882c77789c"
+  integrity sha512-4Nmjyh9qloDwXfDK0DBuWd8WyFApyknoaKbE3leQflGLgNfNsBHy2/VYrlyy/mzMobjJ3J8XtNpbjzG3KRkIFQ==
   dependencies:
     camel-case "^4.1.2"
     fast-glob "^3.2.11"
