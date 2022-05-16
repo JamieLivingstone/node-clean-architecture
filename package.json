@@ -19,7 +19,7 @@
   "dependencies": {
     "@prisma/client": "^3.12.0",
     "awilix": "^7.0.1",
-    "express": "^4.17.3",
+    "express": "^4.18.0",
     "helmet": "^5.0.2",
     "swagger-ui-express": "^4.3.0",
     "winston": "^3.7.2",
