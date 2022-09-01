@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`listPostsQuery lists posts 1`] = `
-Object {
+{
   "count": 11,
   "hasNextPage": false,
   "hasPreviousPage": true,
   "pageNumber": 2,
   "pageSize": 10,
-  "posts": Array [
-    Object {
+  "posts": [
+    {
       "id": 11,
       "published": false,
       "title": "Mock post",

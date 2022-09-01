@@ -21,13 +21,13 @@ function makeProject(options: Partial<Config.InitialOptions>): Config.InitialOpt
 const config: Config.InitialOptions = {
   projects: [
     makeProject({
+      testNamePattern: 'unit-tests',
       displayName: 'unit-tests',
-      name: 'unit-tests',
       testMatch: ['<rootDir>/src/**/*.test.ts'],
     }),
     makeProject({
+      testNamePattern: 'functional-tests',
       displayName: 'functional-tests',
-      name: 'functional-tests',
       testMatch: ['<rootDir>/tests/**/*.test.ts'],
       testEnvironment: '<rootDir>/prisma/prisma-test-environment.ts',
     }),

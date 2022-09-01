@@ -1,16 +1,16 @@
 import { randomUUID } from 'crypto';
 import { execSync } from 'child_process';
 import { Client } from 'pg';
-import { Config } from '@jest/types';
-import NodeEnvironment from 'jest-environment-node';
 import { initializeDbForTests } from '../tests/api/seed';
+import NodeEnvironment from 'jest-environment-node';
+import { JestEnvironmentConfig, EnvironmentContext } from '@jest/environment';
 
 export default class PrismaTestEnvironment extends NodeEnvironment {
   private readonly schema: string;
   private readonly connectionString: string;
 
-  constructor(config: Config.ProjectConfig) {
-    super(config);
+  constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
+    super(config, context);
     this.schema = `test_${randomUUID()}`;
     this.connectionString = `${process.env.DATABASE_URL}?schema=${this.schema}`;
   }
