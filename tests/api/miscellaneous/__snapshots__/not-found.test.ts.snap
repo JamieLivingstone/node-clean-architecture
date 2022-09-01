@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GET /does-not-exist responds with a 404 status code 1`] = `
-Object {
+{
   "status": 404,
   "title": "The specified resource was not found.",
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",

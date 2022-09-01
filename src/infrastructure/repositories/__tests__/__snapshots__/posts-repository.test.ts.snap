@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`postsRepository create creates post and returns the id 1`] = `
-Array [
-  Object {
-    "data": Object {
+[
+  {
+    "data": {
       "createdAt": 2022-02-01T00:00:00.000Z,
       "published": true,
       "title": "Mock title",
@@ -13,9 +13,9 @@ Array [
 `;
 
 exports[`postsRepository delete deletes post 1`] = `
-Array [
-  Object {
-    "where": Object {
+[
+  {
+    "where": {
       "id": 1,
     },
   },
@@ -23,9 +23,9 @@ Array [
 `;
 
 exports[`postsRepository getById returns null if the post does not exist 1`] = `
-Array [
-  Object {
-    "where": Object {
+[
+  {
+    "where": {
       "id": 1,
     },
   },
@@ -42,8 +42,8 @@ Post {
 `;
 
 exports[`postsRepository list list posts 1`] = `
-Array [
-  Object {
+[
+  {
     "skip": 0,
     "take": 10,
   },
@@ -51,9 +51,9 @@ Array [
 `;
 
 exports[`postsRepository list list posts 2`] = `
-Object {
+{
   "count": 2,
-  "posts": Array [
+  "posts": [
     Post {
       "createdAt": 2022-02-01T00:00:00.000Z,
       "id": 1,
@@ -71,14 +71,14 @@ Object {
 `;
 
 exports[`postsRepository update updates post 1`] = `
-Array [
-  Object {
-    "data": Object {
+[
+  {
+    "data": {
       "createdAt": 2022-02-01T00:00:00.000Z,
       "published": true,
       "title": "Mock title",
     },
-    "where": Object {
+    "where": {
       "id": 1,
     },
   },
