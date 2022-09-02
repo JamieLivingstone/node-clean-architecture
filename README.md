@@ -1,5 +1,7 @@
 # Clean Architecture Template
 
+[![Known Vulnerabilities](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture/badge.svg)](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture)
+
 A Node template that follows the Clean Architecture principles and encourages established practices.
 
 ## Features
