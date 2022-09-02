@@ -39,7 +39,7 @@ jobs:
         run: docker-compose -f "docker-compose.yml" down
 
       - name: Publish code coverage to Code Climate
-        if: steps.extract_branch.outputs.branch == 'main'
+        if: ${{ github.ref == 'refs/heads/main' }}
         uses: paambaati/codeclimate-action@v3.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
