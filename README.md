@@ -1,5 +1,6 @@
 # Clean Architecture Template
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/JamieLivingstone/node-clean-architecture/blob/main/LICENSE)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/f2520d575fe754ae7032/test_coverage)](https://codeclimate.com/github/JamieLivingstone/node-clean-architecture/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f2520d575fe754ae7032/maintainability)](https://codeclimate.com/github/JamieLivingstone/node-clean-architecture/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture/badge.svg)](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture)
