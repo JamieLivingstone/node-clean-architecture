@@ -12,7 +12,7 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
   constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
     super(config, context);
     this.schema = `test_${randomUUID()}`;
-    this.connectionString = `${process.env.DATABASE_URL}?schema=${this.schema}`;
+    this.connectionString = `postgresql://prisma:prisma@localhost:5432/app?schema=${this.schema}`;
   }
 
   async setup() {

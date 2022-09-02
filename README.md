@@ -1,5 +1,10 @@
 # Clean Architecture Template
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/JamieLivingstone/node-clean-architecture/blob/main/LICENSE)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/f2520d575fe754ae7032/test_coverage)](https://codeclimate.com/github/JamieLivingstone/node-clean-architecture/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f2520d575fe754ae7032/maintainability)](https://codeclimate.com/github/JamieLivingstone/node-clean-architecture/maintainability)
+[![Known Vulnerabilities](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture/badge.svg)](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture)
+
 A Node template that follows the Clean Architecture principles and encourages established practices.
 
 ## Features
@@ -62,3 +67,11 @@ yarn test:unit
 ```
 yarn test:functional
 ```
+
+## License
+
+[This project is licensed with the MIT license.](https://github.com/JamieLivingstone/node-clean-architecture/blob/main/LICENSE)
+
+## Credits
+
+The project's inspiration is [Jason Taylor's clean architecture template](https://github.com/jasontaylordev/CleanArchitecture) for C#.
