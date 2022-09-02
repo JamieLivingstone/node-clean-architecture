@@ -67,3 +67,11 @@ yarn test:unit
 ```
 yarn test:functional
 ```
+
+## License
+
+[This project is licensed with the MIT license.](https://github.com/JamieLivingstone/node-clean-architecture/blob/main/LICENSE)
+
+## Credits
+
+The project's inspiration is [Jason Taylor's clean architecture template](https://github.com/jasontaylordev/CleanArchitecture) for C#.

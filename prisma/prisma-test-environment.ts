@@ -1,9 +1,9 @@
-import NodeEnvironment from 'jest-environment-node';
-import { JestEnvironmentConfig, EnvironmentContext } from '@jest/environment';
 import { randomUUID } from 'crypto';
 import { execSync } from 'child_process';
 import { Client } from 'pg';
 import { initializeDbForTests } from '../tests/api/seed';
+import NodeEnvironment from 'jest-environment-node';
+import { JestEnvironmentConfig, EnvironmentContext } from '@jest/environment';
 
 export default class PrismaTestEnvironment extends NodeEnvironment {
   private readonly schema: string;
