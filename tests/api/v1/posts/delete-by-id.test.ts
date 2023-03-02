@@ -13,7 +13,7 @@ describe('DELETE /api/v1/posts/:id', () => {
 
   describe('given the post does not exist', () => {
     test('responds with a 404 status code', async () => {
-      const postId = Number.MAX_SAFE_INTEGER;
+      const postId = 999;
 
       const response = await client.delete(`/api/v1/posts/${postId}`);
 

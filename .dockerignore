@@ -1,0 +1,6 @@
+.github
+.husky
+node_modules
+npm-debug.log
+tests
+**/__tests__

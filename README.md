@@ -24,10 +24,10 @@ A Node template that follows the Clean Architecture principles and encourages es
 1. Install the latest [Node.js LTS](https://nodejs.org/en/)
 2. Install Docker and ensure that it is running
 3. Create .env file `cp .env.example .env`
-4. Install project dependencies by running `yarn install`
+4. Install project dependencies by running `npm install`
 5. Start Docker (local Postgres instance) `docker-compose up -d`
 6. Create database `npx prisma migrate deploy`
-7. Start development server `yarn start`
+7. Start development server `npm start`
 8. Navigate to Swagger ([ http://localhost:3000/api-docs](http://localhost:3000/api-docs))
 
 ## Scripts
@@ -35,37 +35,37 @@ A Node template that follows the Clean Architecture principles and encourages es
 **Build production bundle**
 
 ```
-yarn build
+npm run build
 ```
 
 **Lint project (eslint)**
 
 ```
-yarn lint
+npm run lint
 ```
 
 **Start development server**
 
 ```
-yarn start
+npm start
 ```
 
 **Run all tests**
 
 ```
-yarn test
+npm test
 ```
 
 **Run unit tests**
 
 ```
-yarn test:unit
+npm run test:unit
 ```
 
 **Run functional tests (API tests)**
 
 ```
-yarn test:functional
+npm run test:functional
 ```
 
 ## License
