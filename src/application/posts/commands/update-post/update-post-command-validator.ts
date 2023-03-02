@@ -4,8 +4,8 @@ import { UpdatePostCommand } from './update-post-command';
 
 export async function validate(command: UpdatePostCommand) {
   try {
-    const schema: Yup.SchemaOf<UpdatePostCommand> = Yup.object().shape({
-      id: Yup.number().required(),
+    const schema: Yup.ObjectSchema<UpdatePostCommand> = Yup.object().shape({
+      id: Yup.number().positive().required(),
       published: Yup.boolean().optional(),
       title: Yup.string().min(1).optional(),
     });

@@ -4,7 +4,7 @@ import { DeletePostCommand } from './delete-post-command';
 
 export async function validate(command: DeletePostCommand) {
   try {
-    const schema: Yup.SchemaOf<DeletePostCommand> = Yup.object().shape({
+    const schema: Yup.ObjectSchema<DeletePostCommand> = Yup.object().shape({
       id: Yup.number().positive().required(),
     });
 
