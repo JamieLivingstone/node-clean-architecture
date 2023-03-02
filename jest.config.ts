@@ -6,9 +6,8 @@ import { compilerOptions } from './tsconfig.json';
 dotenv.config();
 
 const config: Config.InitialOptions = {
-  collectCoverageFrom: ['<rootDir>/src'],
-  coveragePathIgnorePatterns: ['<rootDir>/tests'],
   testEnvironment: 'node',
+  collectCoverageFrom: ['src/**/*.ts', '!src/**/__tests__/*.ts'],
   projects: [
     {
       displayName: 'unit-tests',

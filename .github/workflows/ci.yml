@@ -16,14 +16,14 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: 'yarn'
+          node-version: 18
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install
 
       - name: Lint
-        run: yarn lint
+        run: npm run lint
 
       - name: Create .env file
         run: cp .env.example .env
@@ -32,7 +32,7 @@ jobs:
         run: docker-compose up -d
 
       - name: Test
-        run: yarn test --coverage
+        run: npm test -- --coverage
 
       - name: Stop functional tests container
         if: always()
