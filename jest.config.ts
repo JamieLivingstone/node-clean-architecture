@@ -18,7 +18,7 @@ const config: Config.InitialOptions = {
       },
     },
     {
-      displayName: 'functional-tests',
+      displayName: 'integration-tests',
       testMatch: ['<rootDir>/tests/**/*.test.ts'],
       testEnvironment: '<rootDir>/prisma/prisma-test-environment.ts',
       moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),

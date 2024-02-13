@@ -12,7 +12,7 @@ A Node template that follows the Clean Architecture principles and encourages es
 - TypeScript first
 - Dependency injection via Awilix
 - CQRS (Command Query Responsibility Segregation)
-- High test coverage (unit, integration and functional tests)
+- High test coverage (unit and integration tests)
 - Automatic error handling
 - Logging
 - Versioned APIs
@@ -62,10 +62,10 @@ npm test
 npm run test:unit
 ```
 
-**Run functional tests (API tests)**
+**Run integration tests (API tests)**
 
 ```
-npm run test:functional
+npm run test:integration
 ```
 
 ## License
