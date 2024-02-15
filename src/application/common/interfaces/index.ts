@@ -1,2 +1,2 @@
-export * from './ILogger';
-export * from './IPostsRepository';
+export * from './logger';
+export * from './posts-repository';

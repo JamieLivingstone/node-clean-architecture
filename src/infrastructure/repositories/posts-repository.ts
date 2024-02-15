@@ -1,9 +1,9 @@
 import { Post as PostModel } from '@prisma/client';
-import { IPostsRepository } from '@application/common/interfaces';
+import { PostsRepository } from '@application/common/interfaces';
 import { Dependencies } from '@infrastructure/di';
 import { Post } from '@domain/entities';
 
-export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRepository {
+export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): PostsRepository {
   return {
     async create({ post }) {
       const { id } = await db.post.create({

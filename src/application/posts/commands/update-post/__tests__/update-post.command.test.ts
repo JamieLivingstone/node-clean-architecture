@@ -1,12 +1,12 @@
 import { mockDeep } from 'jest-mock-extended';
-import { IPostsRepository } from '@application/common/interfaces';
+import { PostsRepository } from '@application/common/interfaces';
 import { NotFoundException, ValidationException } from '@application/common/exceptions';
 import { Post } from '@domain/entities';
 import { makeUpdatePostCommand } from '../update-post-command';
 
 describe('updatePostCommand', () => {
   function setup() {
-    const postsRepository = mockDeep<IPostsRepository>({
+    const postsRepository = mockDeep<PostsRepository>({
       getById: jest.fn().mockResolvedValue(
         new Post({
           id: 1,

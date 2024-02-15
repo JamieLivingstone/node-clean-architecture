@@ -6,8 +6,8 @@ import { makeLogger } from './logger';
 
 export type Dependencies = {
   db: PrismaClient;
-  logger: Interfaces.ILogger;
-  postsRepository: Interfaces.IPostsRepository;
+  logger: Interfaces.Logger;
+  postsRepository: Interfaces.PostsRepository;
 };
 
 export function makeInfrastructure(): { [dependency in keyof Dependencies]: Resolver<Dependencies[dependency]> } {

@@ -1,12 +1,12 @@
 import { mockDeep } from 'jest-mock-extended';
-import { IPostsRepository } from '@application/common/interfaces';
+import { PostsRepository } from '@application/common/interfaces';
 import { ValidationException } from '@application/common/exceptions';
 import { Post } from '@domain/entities';
 import { makeListPostQuery } from '../list-posts-query';
 
 describe('listPostsQuery', () => {
   function setup() {
-    const postsRepository = mockDeep<IPostsRepository>();
+    const postsRepository = mockDeep<PostsRepository>();
     const listPostQuery = makeListPostQuery({ postsRepository });
 
     return {

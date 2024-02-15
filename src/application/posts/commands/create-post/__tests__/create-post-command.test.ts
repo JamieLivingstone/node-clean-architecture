@@ -1,11 +1,11 @@
 import { mockDeep } from 'jest-mock-extended';
-import { IPostsRepository } from '@application/common/interfaces';
+import { PostsRepository } from '@application/common/interfaces';
 import { ValidationException } from '@application/common/exceptions';
 import { makeCreatePostCommand } from '../create-post-command';
 
 describe('createPostCommand', () => {
   function setup() {
-    const postsRepository = mockDeep<IPostsRepository>();
+    const postsRepository = mockDeep<PostsRepository>();
     const createPostCommand = makeCreatePostCommand({ postsRepository });
 
     return {

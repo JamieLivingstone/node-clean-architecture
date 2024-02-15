@@ -62,10 +62,10 @@ npm test
 npm run test:unit
 ```
 
-**Run integration tests (API tests)**
+**Run functional tests (API tests)**
 
 ```
-npm run test:integration
+npm run test:functional
 ```
 
 ## License
