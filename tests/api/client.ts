@@ -1,13 +1,14 @@
+import Fastify from 'fastify';
 import supertest from 'supertest';
-import { makeApp } from '@web/api/app';
-import { makeContainer } from '@web/crosscutting/container';
 
-function makeClient() {
-  const dependencies = makeContainer();
+import app from '../../src/web/api/app';
 
-  const app = makeApp(dependencies);
+export async function makeClient() {
+  const fastify = Fastify();
 
-  return supertest(app);
+  await app(fastify);
+
+  await fastify.ready();
+
+  return supertest(fastify.server);
 }
-
-export const client = makeClient();

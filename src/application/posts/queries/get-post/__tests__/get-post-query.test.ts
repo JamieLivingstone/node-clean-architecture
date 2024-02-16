@@ -1,23 +1,14 @@
-import { mockDeep } from 'jest-mock-extended';
 import { PostsRepository } from '@application/common/interfaces';
-import { NotFoundException } from '@application/common/exceptions';
 import { Post } from '@domain/entities';
 import { makeGetPostQuery } from '../get-post-query';
 
 describe('getPostQuery', () => {
   function setup() {
-    const postsRepository = mockDeep<PostsRepository>({
-      getById: jest.fn().mockResolvedValue(
-        new Post({
-          id: 1,
-          createdAt: new Date(2022, 1, 1),
-          published: false,
-          title: 'Mock post',
-        }),
-      ),
-    });
+    const postsRepository = jest.mocked<Partial<PostsRepository>>({
+      getById: jest.fn(),
+    }) as jest.Mocked<PostsRepository>;
 
-    const getPostQuery = makeGetPostQuery({ postsRepository });
+    const getPostQuery = makeGetPostQuery({ postsRepository: postsRepository as PostsRepository });
 
     return {
       getPostQuery,
@@ -25,22 +16,39 @@ describe('getPostQuery', () => {
     };
   }
 
-  test('gets post and returns domain transfer object', async () => {
-    const { getPostQuery } = setup();
-
-    const result = await getPostQuery({ id: 1 });
-
-    expect(result).toMatchSnapshot();
-  });
-
   describe('given the post does not exist', () => {
-    test('throws not found exception', async () => {
+    it('should return null', async () => {
+      // Arrange
       const { getPostQuery, postsRepository } = setup();
       postsRepository.getById.mockResolvedValue(null);
 
-      const result = getPostQuery({ id: 1 });
+      // Act
+      const result = await getPostQuery({ id: 1 });
 
-      await expect(result).rejects.toThrow(NotFoundException);
+      // Assert
+      await expect(result).toEqual(null);
+    });
+  });
+
+  describe('given the post exists', () => {
+    it('should return the post', async () => {
+      // Arrange
+      const { getPostQuery, postsRepository } = setup();
+
+      postsRepository.getById.mockResolvedValueOnce(
+        new Post({
+          id: 1,
+          createdAt: new Date(2022, 1, 1),
+          published: false,
+          title: 'Mock post',
+        }),
+      );
+
+      // Act
+      const result = await getPostQuery({ id: 1 });
+
+      // Assert
+      expect(result).toMatchSnapshot();
     });
   });
 });

@@ -10,7 +10,9 @@ export type Dependencies = {
   postsRepository: Interfaces.PostsRepository;
 };
 
-export function makeInfrastructure(): { [dependency in keyof Dependencies]: Resolver<Dependencies[dependency]> } {
+export function makeInfrastructureDependencies(): {
+  [dependency in keyof Dependencies]: Resolver<Dependencies[dependency]>;
+} {
   const logger = makeLogger();
   const db = new PrismaClient();
 

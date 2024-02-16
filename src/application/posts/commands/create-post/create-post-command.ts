@@ -1,4 +1,3 @@
-import { Dependencies } from '@infrastructure/di';
 import { Post } from '@domain/entities';
 import { validate } from './create-post-command-validator';
 

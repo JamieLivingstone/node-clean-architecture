@@ -1,9 +1,8 @@
 import { Post as PostModel } from '@prisma/client';
 import { PostsRepository } from '@application/common/interfaces';
-import { Dependencies } from '@infrastructure/di';
 import { Post } from '@domain/entities';
 
-export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): PostsRepository {
+export function makePostsRepository({ db }: Dependencies): PostsRepository {
   return {
     async create({ post }) {
       const { id } = await db.post.create({
@@ -42,18 +41,6 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): PostsRepo
         count,
         posts: posts.map(toEntity),
       };
-    },
-    async update({ post }) {
-      await db.post.update({
-        where: {
-          id: post.id,
-        },
-        data: {
-          createdAt: post.createdAt,
-          published: post.published,
-          title: post.title,
-        },
-      });
     },
   };
 

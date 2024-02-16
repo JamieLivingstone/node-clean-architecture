@@ -6,7 +6,7 @@ export async function initializeDbForTests() {
 
   await Promise.all([
     client.post.createMany({
-      data: posts.map((post) => ({
+      data: seedPosts.map((post) => ({
         createdAt: post.createdAt,
         published: post.published,
         title: post.title,
@@ -15,7 +15,7 @@ export async function initializeDbForTests() {
   ]);
 }
 
-export const posts: Array<Post> = [
+export const seedPosts: Array<Post> = [
   new Post({
     id: 1,
     createdAt: new Date(2022, 1, 1),

@@ -1,9 +1,25 @@
-import { makeContainer } from '@web/crosscutting/container';
-import { makeApp } from './app';
+import Fastify from 'fastify';
+import app from './app';
 
-const dependencies = makeContainer();
-const PORT = Number(process.env.PORT) || 3000;
+async function start() {
+  const fastify = Fastify();
 
-makeApp(dependencies).listen(PORT, function applicationStarted() {
-  dependencies.logger.info({ detail: `Application running at: http://localhost:${PORT}/api-docs` });
-});
+  try {
+    await app(fastify);
+
+    await fastify.listen({ port: 3000 });
+
+    fastify.diContainer.resolve('logger').info({
+      message: 'Server is running. View the API documentation at http://localhost:3000/api-docs',
+    });
+  } catch (error) {
+    fastify.diContainer.resolve('logger').error({
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+
+    process.exit(1);
+  }
+}
+
+start();
