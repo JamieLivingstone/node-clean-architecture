@@ -1,4 +1,4 @@
-import { Post } from '../../src/domain/entities';
+import { Post } from '@domain/entities';
 import { PrismaClient } from '@prisma/client';
 
 export async function initializeDbForTests() {

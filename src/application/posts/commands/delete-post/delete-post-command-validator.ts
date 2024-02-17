@@ -1,15 +1,15 @@
-import * as Yup from 'yup';
+import { z, ZodError } from 'zod';
 import { ValidationException } from '@application/common/exceptions';
 import { DeletePostCommand } from './delete-post-command';
 
 export async function validate(command: DeletePostCommand) {
   try {
-    const schema: Yup.ObjectSchema<DeletePostCommand> = Yup.object().shape({
-      id: Yup.number().positive().required(),
+    const schema: z.ZodType<DeletePostCommand> = z.object({
+      id: z.number().int().positive(),
     });
 
-    await schema.validate(command, { abortEarly: false, strict: true });
+    await schema.parseAsync(command);
   } catch (error) {
-    throw new ValidationException(error as Yup.ValidationError);
+    throw new ValidationException(error as ZodError);
   }
 }

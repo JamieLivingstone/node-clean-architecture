@@ -1,16 +1,16 @@
-import * as Yup from 'yup';
-import { ValidationException } from '@application/common/exceptions';
+import { z, ZodError } from 'zod';
 import { CreatePostCommand } from './create-post-command';
+import { ValidationException } from '@application/common/exceptions';
 
 export async function validate(command: CreatePostCommand) {
   try {
-    const schema: Yup.ObjectSchema<CreatePostCommand> = Yup.object().shape({
-      published: Yup.boolean().required(),
-      title: Yup.string().min(1).required(),
+    const schema: z.ZodType<CreatePostCommand> = z.object({
+      published: z.boolean(),
+      title: z.string().min(1),
     });
 
-    await schema.validate(command, { abortEarly: false, strict: true });
+    await schema.parseAsync(command);
   } catch (error) {
-    throw new ValidationException(error as Yup.ValidationError);
+    throw new ValidationException(error as ZodError);
   }
 }

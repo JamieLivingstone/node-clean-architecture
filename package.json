@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json",
-    "lint": "tsc --noEmit && eslint .",
     "dev": "tsx watch src/web/server | pino-pretty",
+    "lint": "tsc --noEmit && eslint .",
     "test": "jest",
     "test:unit": "jest --selectProjects unit-tests",
     "test:functional": "jest --selectProjects functional-tests",
@@ -27,7 +27,6 @@
     "fastify-plugin": "^4.5.1",
     "helmet": "^7.1.0",
     "pino": "^8.18.0",
-    "yup": "^1.3.3",
     "zod": "^3.22.4"
   },
   "devDependencies": {

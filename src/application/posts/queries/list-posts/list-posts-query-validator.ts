@@ -1,16 +1,16 @@
-import * as Yup from 'yup';
+import { z, ZodError } from 'zod';
 import { ValidationException } from '@application/common/exceptions';
 import { ListPostsQuery } from './list-posts-query';
 
 export async function validate(query: ListPostsQuery) {
   try {
-    const schema: Yup.ObjectSchema<ListPostsQuery> = Yup.object().shape({
-      pageNumber: Yup.number().min(1).required(),
-      pageSize: Yup.number().min(1).max(50).required(),
+    const schema: z.ZodType<ListPostsQuery> = z.object({
+      pageNumber: z.number().int().min(1),
+      pageSize: z.number().int().min(1).max(50),
     });
 
-    await schema.validate(query, { abortEarly: false, strict: true });
+    await schema.parseAsync(query);
   } catch (error) {
-    throw new ValidationException(error as Yup.ValidationError);
+    throw new ValidationException(error as ZodError);
   }
 }
