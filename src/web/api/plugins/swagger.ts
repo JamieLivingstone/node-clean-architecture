@@ -3,7 +3,7 @@ import SwaggerUI from '@fastify/swagger-ui';
 import { FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 
-async function swaggerGenerator(fastify: FastifyInstance) {
+async function swaggerGeneratorPlugin(fastify: FastifyInstance) {
   await fastify.register(Swagger, {
     swagger: {
       info: {
@@ -15,13 +15,6 @@ async function swaggerGenerator(fastify: FastifyInstance) {
       schemes: ['http', 'https'],
       consumes: ['application/json'],
       produces: ['application/json', 'text/html'],
-      securityDefinitions: {
-        Bearer: {
-          type: 'apiKey',
-          name: 'Bearer',
-          in: 'header',
-        },
-      },
     },
   });
 
@@ -30,6 +23,6 @@ async function swaggerGenerator(fastify: FastifyInstance) {
   });
 }
 
-export default fp(swaggerGenerator, {
+export default fp(swaggerGeneratorPlugin, {
   name: 'swaggerGenerator',
 });

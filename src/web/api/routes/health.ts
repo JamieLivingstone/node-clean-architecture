@@ -13,6 +13,7 @@ export default async function healthRoutes(fastify: FastifyInstance) {
           },
         },
       },
+      tags: ['health'],
     },
     handler() {
       return { status: 'ok' };

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getPostQuery given the post exists should return the post 1`] = `
+{
+  "id": 1,
+  "published": false,
+  "title": "Mock post",
+}
+`;

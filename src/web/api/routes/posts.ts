@@ -1,13 +1,39 @@
-import { FastifyInstance } from 'fastify';
 import { makePostsUseCases } from '@application/posts';
-import { JsonSchemaToTsProvider } from '@fastify/type-provider-json-schema-to-ts';
 
-export default async function postRoutes(fastify: FastifyInstance) {
+export default async function postRoutes(fastify: FastifyRouteInstance) {
   const posts = makePostsUseCases(fastify.diContainer.cradle);
-  const server = fastify.withTypeProvider<JsonSchemaToTsProvider>();
 
-  // GET /api/v1/posts/:id - Get an individual post by id
-  server.route({
+  fastify.route({
+    method: 'POST',
+    url: '/api/v1/posts',
+    schema: {
+      body: {
+        type: 'object',
+        properties: {
+          published: { type: 'boolean' },
+          title: { type: 'string' },
+        },
+        required: ['published', 'title'],
+      },
+      response: {
+        201: {
+          type: 'object',
+          properties: {
+            id: { type: 'number' },
+          },
+        },
+        400: {},
+      },
+      tags: ['posts'],
+    },
+    async handler(req, res) {
+      const post = await posts.commands.createPost(req.body);
+
+      res.status(201).send(post);
+    },
+  });
+
+  fastify.route({
     method: 'GET',
     url: '/api/v1/posts/:id',
     schema: {
@@ -27,13 +53,20 @@ export default async function postRoutes(fastify: FastifyInstance) {
             title: { type: 'string' },
           },
         },
+        404: {
+          type: 'object',
+          properties: {
+            message: { type: 'string' },
+          },
+        },
       },
+      tags: ['posts'],
     },
     async handler(req, res) {
       const post = await posts.queries.getPost({ id: req.params.id });
 
       if (!post) {
-        res.status(404).send({ message: 'Post not found' });
+        res.status(404).send({ message: `Post with id ${req.params.id} not found` });
         return;
       }
 

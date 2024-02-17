@@ -23,9 +23,5 @@
     "isolatedModules": false,
     "removeComments": true,
     "noStrictGenericChecks": false
-  },
-  "ts-node": {
-    "files": true,
-    "logError": true
   }
 }

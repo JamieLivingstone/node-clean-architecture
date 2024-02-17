@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json && tsc-alias -p tsconfig.build.json",
     "lint": "tsc --noEmit && eslint .",
-    "start": "tsnd -r tsconfig-paths/register src/web/api/server.ts",
+    "dev": "tsx watch src/web/api/server | pino-pretty",
     "test": "jest",
     "test:unit": "jest --selectProjects unit-tests",
     "test:functional": "jest --selectProjects functional-tests",
@@ -44,13 +44,13 @@
     "jest": "^29.7.0",
     "lint-staged": "^14.0.1",
     "pg": "^8.11.3",
+    "pino-pretty": "^10.3.1",
     "prettier": "^3.2.5",
     "prisma": "^5.9.1",
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
-    "ts-node-dev": "^2.0.0",
     "tsc-alias": "^1.8.8",
-    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   }
 }
