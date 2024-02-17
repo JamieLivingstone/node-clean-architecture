@@ -3,7 +3,7 @@ import pino from 'pino';
 
 export function makeLogger(): Logger {
   return pino({
-    level: 'info',
+    level: process.env.LOG_LEVEL,
     enabled: process.env.NODE_ENV !== 'test',
   });
 }
