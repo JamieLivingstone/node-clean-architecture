@@ -1,4 +1,5 @@
 import * as Interfaces from '@application/common/interfaces';
+import { makeConfig } from '@infrastructure/config';
 import { PrismaClient } from '@prisma/client';
 import { Resolver, asFunction, asValue } from 'awilix';
 
@@ -6,6 +7,7 @@ import { makeLogger } from './logger';
 import * as repositories from './repositories';
 
 export type Dependencies = {
+  config: Interfaces.ApplicationConfig;
   db: PrismaClient;
   logger: Interfaces.Logger;
   postsRepository: Interfaces.PostsRepository;
@@ -14,7 +16,8 @@ export type Dependencies = {
 export function makeInfrastructureDependencies(): {
   [dependency in keyof Dependencies]: Resolver<Dependencies[dependency]>;
 } {
-  const logger = makeLogger();
+  const config = makeConfig();
+  const logger = makeLogger(config);
   const db = new PrismaClient();
 
   db.$connect().catch(() => {
@@ -23,6 +26,7 @@ export function makeInfrastructureDependencies(): {
   });
 
   return {
+    config: asValue(config),
     db: asValue(db),
     logger: asValue(logger),
     postsRepository: asFunction(repositories.makePostsRepository).singleton(),

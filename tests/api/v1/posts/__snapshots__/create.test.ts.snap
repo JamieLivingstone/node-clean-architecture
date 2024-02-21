@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`POST /api/v1/posts given a valid request should create post and respond with a 201 status code 1`] = `
+{
+  "id": StringMatching /\\^\\[0-9a-fA-F\\]\\{8\\}\\\\b-\\[0-9a-fA-F\\]\\{4\\}\\\\b-\\[0-9a-fA-F\\]\\{4\\}\\\\b-\\[0-9a-fA-F\\]\\{4\\}\\\\b-\\[0-9a-fA-F\\]\\{12\\}\\$/,
+}
+`;

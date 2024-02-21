@@ -1,9 +1,9 @@
-import { Logger } from '@application/common/interfaces';
+import { ApplicationConfig, Logger } from '@application/common/interfaces';
 import pino from 'pino';
 
-export function makeLogger(): Logger {
+export function makeLogger(config: ApplicationConfig): Logger {
   return pino({
-    level: process.env.LOG_LEVEL,
-    enabled: process.env.NODE_ENV !== 'test',
+    level: config.logLevel,
+    enabled: config.env !== 'test',
   });
 }

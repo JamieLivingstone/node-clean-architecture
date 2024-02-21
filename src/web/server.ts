@@ -11,8 +11,10 @@ async function start() {
 
   await app(fastify);
 
+  const applicationConfig = fastify.diContainer.cradle.config;
+
   try {
-    await fastify.listen({ port: 3000 });
+    await fastify.listen({ port: applicationConfig.port });
   } catch (error) {
     fastify.log.error(error);
     process.exit(1);
