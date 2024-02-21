@@ -1,7 +1,7 @@
 import { validate } from './delete-post-command-validator';
 
 export type DeletePostCommand = Readonly<{
-  id: number;
+  id: string;
 }>;
 
 export function makeDeletePostCommand({ postsRepository }: Pick<Dependencies, 'postsRepository'>) {

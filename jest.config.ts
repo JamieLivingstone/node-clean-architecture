@@ -1,6 +1,7 @@
-import dotenv from 'dotenv';
 import { Config } from '@jest/types';
+import dotenv from 'dotenv';
 import { pathsToModuleNameMapper } from 'ts-jest';
+
 import { compilerOptions } from './tsconfig.json';
 
 dotenv.config();
@@ -18,7 +19,7 @@ const config: Config.InitialOptions = {
       },
     },
     {
-      displayName: 'integration-tests',
+      displayName: 'functional-tests',
       testMatch: ['<rootDir>/tests/**/*.test.ts'],
       testEnvironment: '<rootDir>/prisma/prisma-test-environment.ts',
       moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),

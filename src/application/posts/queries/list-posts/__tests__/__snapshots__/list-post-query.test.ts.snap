@@ -9,8 +9,7 @@ exports[`listPostsQuery given a valid query should list posts 1`] = `
   "pageSize": 10,
   "posts": [
     {
-      "id": 11,
-      "published": false,
+      "id": "907b0a0b-9a12-4073-ab27-3ad5927955e9",
       "title": "Mock post",
     },
   ],

@@ -12,6 +12,7 @@ export default async function healthRoutes(fastify: FastifyInstance) {
             status: { type: 'string' },
           },
         },
+        500: { $ref: 'ExceptionResponse#' },
       },
       tags: ['health'],
     },

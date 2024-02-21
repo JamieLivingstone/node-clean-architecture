@@ -1,6 +1,7 @@
-import { PostsRepository } from '@application/common/interfaces';
 import { ValidationException } from '@application/common/exceptions';
+import { PostsRepository } from '@application/common/interfaces';
 import { Post } from '@domain/entities';
+
 import { makeDeletePostCommand } from '../delete-post-command';
 
 describe('deletePostCommand', () => {
@@ -25,7 +26,7 @@ describe('deletePostCommand', () => {
 
       // Act
       const result = deletePostCommand({
-        id: 0, // Must be a positive number
+        id: 'invalid-uuid',
       });
 
       // Assert
@@ -40,15 +41,14 @@ describe('deletePostCommand', () => {
 
       postsRepository.getById.mockResolvedValue(
         new Post({
-          id: 1,
+          id: '907b0a0b-9a12-4073-ab27-3ad5927955e9',
           createdAt: new Date(2022, 1, 1),
-          published: false,
           title: 'Mock post',
         }),
       );
 
       // Act
-      await deletePostCommand({ id: 1 });
+      await deletePostCommand({ id: '907b0a0b-9a12-4073-ab27-3ad5927955e9' });
 
       // Assert
       expect(postsRepository.delete).toHaveBeenCalledTimes(1);

@@ -1,5 +1,6 @@
-import { PostsRepository } from '@application/common/interfaces';
 import { ValidationException } from '@application/common/exceptions';
+import { PostsRepository } from '@application/common/interfaces';
+
 import { makeCreatePostCommand } from '../create-post-command';
 
 describe('createPostCommand', () => {
@@ -23,7 +24,6 @@ describe('createPostCommand', () => {
 
       // Act
       const result = createPostCommand({
-        published: true,
         title: '', // Cannot be empty
       });
 
@@ -36,16 +36,15 @@ describe('createPostCommand', () => {
     it('should create post and return the generated id', async () => {
       // Arrange
       const { createPostCommand, postsRepository } = setup();
-      postsRepository.create.mockResolvedValueOnce({ id: 1 });
+      postsRepository.create.mockResolvedValueOnce({ id: '907b0a0b-9a12-4073-ab27-3ad5927955e9' });
 
       // Act
       const result = await createPostCommand({
-        published: true,
         title: 'My first post',
       });
 
       // Assert
-      expect(result).toEqual({ id: 1 });
+      expect(result).toEqual({ id: '907b0a0b-9a12-4073-ab27-3ad5927955e9' });
     });
   });
 });

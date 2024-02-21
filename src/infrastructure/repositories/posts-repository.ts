@@ -1,6 +1,6 @@
-import { Post as PostModel } from '@prisma/client';
 import { PostsRepository } from '@application/common/interfaces';
 import { Post } from '@domain/entities';
+import { Post as PostModel } from '@prisma/client';
 
 export function makePostsRepository({ db }: Dependencies): PostsRepository {
   return {
@@ -8,7 +8,6 @@ export function makePostsRepository({ db }: Dependencies): PostsRepository {
       const { id } = await db.post.create({
         data: {
           createdAt: post.createdAt,
-          published: post.published,
           title: post.title,
         },
       });
@@ -48,7 +47,6 @@ export function makePostsRepository({ db }: Dependencies): PostsRepository {
     return new Post({
       id: post.id,
       createdAt: post.createdAt,
-      published: post.published,
       title: post.title,
     });
   }

@@ -1,4 +1,4 @@
-import { Dependencies as InfrastructureDependencies } from '../../src/infrastructure/di';
+import { JsonSchemaToTsProvider } from '@fastify/type-provider-json-schema-to-ts';
 import {
   FastifyBaseLogger,
   FastifyInstance,
@@ -6,7 +6,8 @@ import {
   RawRequestDefaultExpression,
   RawServerDefault,
 } from 'fastify';
-import { JsonSchemaToTsProvider } from '@fastify/type-provider-json-schema-to-ts';
+
+import { Dependencies as InfrastructureDependencies } from '../../src/infrastructure/di';
 
 declare global {
   // Declare global DI container type

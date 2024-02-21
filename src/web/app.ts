@@ -1,14 +1,14 @@
 import AutoLoad from '@fastify/autoload';
+import { diContainer, fastifyAwilixPlugin } from '@fastify/awilix';
 import Cors from '@fastify/cors';
 import Helmet from '@fastify/helmet';
 import UnderPressure from '@fastify/under-pressure';
-import { diContainer, fastifyAwilixPlugin } from '@fastify/awilix';
+import { makeInfrastructureDependencies } from '@infrastructure/di';
 import { FastifyInstance } from 'fastify';
 import { join } from 'path';
-import { makeInfrastructureDependencies } from '@infrastructure/di';
 
 export default async function makeApp(fastify: FastifyInstance) {
-  // Auto-inject dependencies
+  // Create a dependency injection container
   await fastify.register(fastifyAwilixPlugin);
 
   diContainer.register({
@@ -30,7 +30,7 @@ export default async function makeApp(fastify: FastifyInstance) {
 
   // Configure CORS
   await fastify.register(Cors, {
-    origin: true,
+    origin: false, // TODO: Set this to a valid origin
   });
 
   // Auto-load plugins

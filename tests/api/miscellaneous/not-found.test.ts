@@ -3,7 +3,7 @@ import { makeClient } from '../client';
 describe('GET /does-not-exist', () => {
   test('responds with a 404 status code', async () => {
     // Arrange
-    const client = await makeClient();
+    const { client } = await makeClient();
 
     // Act
     const response = await client.get('/does-not-exist');

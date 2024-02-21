@@ -1,12 +1,11 @@
 import { makeClient } from '../../client';
-import { seedPosts } from '../../seed';
 
 describe('GET /api/v1/posts/:id', () => {
   describe('given the post does not exist', () => {
-    test('responds with a 404 status code', async () => {
+    it('should respond with a 404 status code', async () => {
       // Arrange
-      const client = await makeClient();
-      const postId = 999;
+      const { client } = await makeClient();
+      const postId = '00000000-0000-0000-0000-000000000000';
 
       // Act
       const response = await client.get(`/api/v1/posts/${postId}`);
@@ -17,17 +16,20 @@ describe('GET /api/v1/posts/:id', () => {
   });
 
   describe('given a valid request', () => {
-    test('responds with a 200 status code', async () => {
+    it('should respond with a 200 status code', async () => {
       // Arrange
-      const client = await makeClient();
-      const postId = seedPosts[0].id;
+      const { client, seed } = await makeClient();
+      const post = seed.posts[0];
 
       // Act
-      const response = await client.get(`/api/v1/posts/${postId}`);
+      const response = await client.get(`/api/v1/posts/${post.id}`);
 
       // Assert
       expect(response.status).toEqual(200);
-      expect(response.body).toMatchSnapshot();
+      expect(response.body).toEqual({
+        id: post.id,
+        title: post.title,
+      });
     });
   });
 });

@@ -11,8 +11,7 @@ datasource db {
 }
 
 model Post {
-  id         Int        @id @default(autoincrement())
-  createdAt  DateTime   @default(now())
-  title      String
-  published  Boolean    @default(false)
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  title     String
 }

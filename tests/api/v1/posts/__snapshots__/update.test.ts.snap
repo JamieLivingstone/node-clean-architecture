@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`PATCH /api/v1/posts/:id given a valid request updates post and responds with a 200 status code 1`] = `
-{
-  "id": 1,
-  "published": true,
-  "title": "Updated title",
-}
-`;

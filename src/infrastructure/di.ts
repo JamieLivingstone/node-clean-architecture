@@ -1,8 +1,9 @@
-import { asFunction, asValue, Resolver } from 'awilix';
-import { PrismaClient } from '@prisma/client';
 import * as Interfaces from '@application/common/interfaces';
-import * as repositories from './repositories';
+import { PrismaClient } from '@prisma/client';
+import { Resolver, asFunction, asValue } from 'awilix';
+
 import { makeLogger } from './logger';
+import * as repositories from './repositories';
 
 export type Dependencies = {
   db: PrismaClient;

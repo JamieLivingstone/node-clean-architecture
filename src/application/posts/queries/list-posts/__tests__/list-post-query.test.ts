@@ -1,6 +1,7 @@
-import { PostsRepository } from '@application/common/interfaces';
 import { ValidationException } from '@application/common/exceptions';
+import { PostsRepository } from '@application/common/interfaces';
 import { Post } from '@domain/entities';
+
 import { makeListPostsQuery } from '../list-posts-query';
 
 describe('listPostsQuery', () => {
@@ -42,9 +43,8 @@ describe('listPostsQuery', () => {
         count: 11,
         posts: [
           new Post({
-            id: 11,
+            id: '907b0a0b-9a12-4073-ab27-3ad5927955e9',
             createdAt: new Date(2022, 1, 1),
-            published: false,
             title: 'Mock post',
           }),
         ],

@@ -1,9 +1,9 @@
 import { makeClient } from '../client';
 
 describe('GET /health', () => {
-  test('responds with a 200 status code', async () => {
+  it('should respond with a 200 status code', async () => {
     // Arrange
-    const client = await makeClient();
+    const { client } = await makeClient();
 
     // Act
     const response = await client.get('/health');

@@ -2,13 +2,13 @@ import { ZodError } from 'zod';
 
 export class ValidationException extends Error {
   constructor(error: ZodError) {
-    super('Validation failed');
+    super('APPLICATION_VALIDATION_ERROR');
     this.name = 'ValidationException';
-    this.details = error.issues.map((issue) => ({
+    this.errors = error.issues.map((issue) => ({
       path: issue.path.join('.'),
       message: issue.message,
     }));
   }
 
-  details: { path: string; message: string }[];
+  errors: { path: string; message: string }[];
 }

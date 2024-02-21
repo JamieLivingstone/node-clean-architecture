@@ -4,7 +4,7 @@ describe('GET /api/v1/posts', () => {
   describe('given an invalid request', () => {
     test('responds with a 400 status code', async () => {
       // Arrange
-      const client = await makeClient();
+      const { client } = await makeClient();
       const pageSize = 1000; // Cannot exceed 50
 
       // Act
@@ -16,9 +16,9 @@ describe('GET /api/v1/posts', () => {
   });
 
   describe('given a valid request', () => {
-    test('responds with a 200 status code', async () => {
+    it('should respond with a 200 status code', async () => {
       // Arrange
-      const client = await makeClient();
+      const { client } = await makeClient();
       const pageNumber = 3;
       const pageSize = 2;
 
@@ -27,7 +27,6 @@ describe('GET /api/v1/posts', () => {
 
       // Assert
       expect(response.status).toEqual(200);
-      expect(response.body).toMatchSnapshot();
     });
   });
 });

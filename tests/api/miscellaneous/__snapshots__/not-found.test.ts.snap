@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`GET /does-not-exist responds with a 404 status code 1`] = `
-{
-  "error": "Not Found",
-  "message": "Route GET:/does-not-exist not found",
-  "statusCode": 404,
-}
-`;
