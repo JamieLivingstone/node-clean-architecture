@@ -6,7 +6,7 @@ import Fastify from 'fastify';
 import supertest from 'supertest';
 
 export async function makeClient() {
-  const fastify = Fastify({ logger: true });
+  const fastify = Fastify();
 
   await app(fastify);
 
