@@ -1,8 +1,13 @@
 import { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment';
 import { execSync } from 'child_process';
 import { randomUUID } from 'crypto';
+import dotenv from 'dotenv';
 import NodeEnvironment from 'jest-environment-node';
 import { Client } from 'pg';
+
+dotenv.config();
+
+const { DATABASE_URL } = process.env;
 
 export default class PrismaTestEnvironment extends NodeEnvironment {
   private readonly schema: string;
@@ -11,7 +16,7 @@ export default class PrismaTestEnvironment extends NodeEnvironment {
   constructor(config: JestEnvironmentConfig, context: EnvironmentContext) {
     super(config, context);
     this.schema = `test_${randomUUID()}`;
-    this.connectionString = `postgresql://user:password@localhost:5432/app?schema=${this.schema}`;
+    this.connectionString = `${DATABASE_URL}?schema=${this.schema}`;
   }
 
   async setup() {
