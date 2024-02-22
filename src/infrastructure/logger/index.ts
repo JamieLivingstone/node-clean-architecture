@@ -1,16 +1,9 @@
-import winston from 'winston';
-import { ILogger } from '@application/common/interfaces';
+import { ApplicationConfig, Logger } from '@application/common/interfaces';
+import pino from 'pino';
 
-export function makeLogger(): ILogger {
-  return winston.createLogger({
-    format: winston.format.json(),
-    level: 'info',
-    transports: [
-      new winston.transports.Console({
-        format: winston.format.json(),
-        level: 'info',
-        silent: process.env.NODE_ENV === 'test',
-      }),
-    ],
+export function makeLogger(config: ApplicationConfig): Logger {
+  return pino({
+    level: config.logLevel,
+    enabled: config.env !== 'test',
   });
 }

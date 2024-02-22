@@ -1,15 +1,13 @@
-import { Post as PostModel } from '@prisma/client';
-import { IPostsRepository } from '@application/common/interfaces';
-import { Dependencies } from '@infrastructure/di';
+import { PostsRepository } from '@application/common/interfaces';
 import { Post } from '@domain/entities';
+import { Post as PostModel } from '@prisma/client';
 
-export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRepository {
+export function makePostsRepository({ db }: Dependencies): PostsRepository {
   return {
     async create({ post }) {
       const { id } = await db.post.create({
         data: {
           createdAt: post.createdAt,
-          published: post.published,
           title: post.title,
         },
       });
@@ -43,25 +41,12 @@ export function makePostsRepository({ db }: Pick<Dependencies, 'db'>): IPostsRep
         posts: posts.map(toEntity),
       };
     },
-    async update({ post }) {
-      await db.post.update({
-        where: {
-          id: post.id,
-        },
-        data: {
-          createdAt: post.createdAt,
-          published: post.published,
-          title: post.title,
-        },
-      });
-    },
   };
 
   function toEntity(post: PostModel) {
     return new Post({
       id: post.id,
       createdAt: post.createdAt,
-      published: post.published,
       title: post.title,
     });
   }

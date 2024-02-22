@@ -12,12 +12,11 @@ A Node template that follows the Clean Architecture principles and encourages es
 - TypeScript first
 - Dependency injection via Awilix
 - CQRS (Command Query Responsibility Segregation)
-- High test coverage (unit, integration and functional tests)
-- Automatic error handling
-- Logging
-- Versioned APIs
-- Swagger
-- Prisma ORM
+- Automatic API documentation via Swagger
+- Built with scalability and performance in mind by using Fastify (see [benchmarks](https://www.fastify.io/benchmarks))
+- Built in logging with Pino
+- Comprehensive testing including unit and functional tests
+- Prisma ORM integration
 
 ## Getting Started
 
@@ -27,8 +26,8 @@ A Node template that follows the Clean Architecture principles and encourages es
 4. Install project dependencies by running `npm install`
 5. Start Docker (local Postgres instance) `docker-compose up -d`
 6. Create database `npx prisma migrate deploy`
-7. Start development server `npm start`
-8. Navigate to Swagger ([ http://localhost:3000/api-docs](http://localhost:3000/api-docs))
+7. Start development server `npm run dev`
+8. Navigate to Swagger ([http://localhost:3000/api-docs](http://localhost:3000/api-docs))
 
 ## Scripts
 
@@ -47,7 +46,7 @@ npm run lint
 **Start development server**
 
 ```
-npm start
+npm run dev
 ```
 
 **Run all tests**

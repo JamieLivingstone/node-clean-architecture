@@ -1,4 +1,3 @@
-import { Dependencies } from '@infrastructure/di';
 import { toDto } from './list-posts-query-mapper';
 import { validate } from './list-posts-query-validator';
 
@@ -7,7 +6,7 @@ export type ListPostsQuery = Readonly<{
   pageSize: number;
 }>;
 
-export function makeListPostQuery({ postsRepository }: Pick<Dependencies, 'postsRepository'>) {
+export function makeListPostsQuery({ postsRepository }: Pick<Dependencies, 'postsRepository'>) {
   return async function listPostsQuery(query: ListPostsQuery) {
     await validate(query);
 

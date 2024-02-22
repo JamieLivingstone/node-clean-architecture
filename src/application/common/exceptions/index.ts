@@ -1,4 +1,14 @@
-import { ValidationError } from 'yup';
+import { ZodError } from 'zod';
 
-export class NotFoundException extends Error {}
-export class ValidationException extends ValidationError {}
+export class ValidationException extends Error {
+  constructor(error: ZodError) {
+    super('APPLICATION_VALIDATION_ERROR');
+    this.name = 'ValidationException';
+    this.errors = error.issues.map((issue) => ({
+      path: issue.path.join('.'),
+      message: issue.message,
+    }));
+  }
+
+  errors: { path: string; message: string }[];
+}

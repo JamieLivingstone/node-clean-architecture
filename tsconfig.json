@@ -12,7 +12,7 @@
     "lib": ["esnext"],
     "module": "commonjs",
     "outDir": "./dist",
-    "typeRoots": ["./node_modules/@types"],
+    "typeRoots": ["./node_modules/@types", "types"],
     "strict": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -21,10 +21,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "removeComments": true
-  },
-  "ts-node": {
-    "files": true,
-    "logError": true
+    "removeComments": true,
+    "noStrictGenericChecks": false
   }
 }

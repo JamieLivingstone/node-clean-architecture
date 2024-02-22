@@ -21,7 +21,6 @@ export function toDto({
     pageSize,
     posts: posts.map((post) => ({
       id: post.id,
-      published: post.published,
       title: post.title,
     })),
     totalPages,

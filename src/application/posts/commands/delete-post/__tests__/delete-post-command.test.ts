@@ -1,22 +1,15 @@
-import { mockDeep } from 'jest-mock-extended';
-import { IPostsRepository } from '@application/common/interfaces';
-import { NotFoundException, ValidationException } from '@application/common/exceptions';
+import { ValidationException } from '@application/common/exceptions';
+import { PostsRepository } from '@application/common/interfaces';
 import { Post } from '@domain/entities';
+
 import { makeDeletePostCommand } from '../delete-post-command';
 
 describe('deletePostCommand', () => {
   function setup() {
-    const postsRepository = mockDeep<IPostsRepository>({
-      create: jest.fn().mockResolvedValue({}),
-      getById: jest.fn().mockResolvedValue(
-        new Post({
-          id: 1,
-          createdAt: new Date(2022, 1, 1),
-          published: false,
-          title: 'Mock post',
-        }),
-      ),
-    });
+    const postsRepository = jest.mocked<Partial<PostsRepository>>({
+      delete: jest.fn(),
+      getById: jest.fn(),
+    }) as jest.Mocked<PostsRepository>;
 
     const deletePostCommand = makeDeletePostCommand({ postsRepository });
 
@@ -26,34 +19,39 @@ describe('deletePostCommand', () => {
     };
   }
 
-  test('deletes post', async () => {
-    const { deletePostCommand, postsRepository } = setup();
+  describe('given an invalid command', () => {
+    it('should throw a validation exception', async () => {
+      // Arrange
+      const { deletePostCommand } = setup();
 
-    await deletePostCommand({ id: 1 });
+      // Act
+      const result = deletePostCommand({
+        id: 'invalid-uuid',
+      });
 
-    expect(postsRepository.delete).toHaveBeenCalledTimes(1);
-  });
-
-  describe('given the post does not exist', () => {
-    test('throws not found exception', async () => {
-      const { deletePostCommand, postsRepository } = setup();
-      postsRepository.getById.mockResolvedValue(null);
-
-      const result = deletePostCommand({ id: 3232 });
-
-      await expect(result).rejects.toThrow(NotFoundException);
+      // Assert
+      await expect(result).rejects.toThrow(ValidationException);
     });
   });
 
-  describe('given an invalid command', () => {
-    test('validates and throws validation exception', async () => {
-      const { deletePostCommand } = setup();
+  describe('given a valid command', () => {
+    it('should delete the post', async () => {
+      // Arrange
+      const { deletePostCommand, postsRepository } = setup();
 
-      const result = deletePostCommand({
-        id: 0, // Must be a positive number
-      });
+      postsRepository.getById.mockResolvedValue(
+        new Post({
+          id: '907b0a0b-9a12-4073-ab27-3ad5927955e9',
+          createdAt: new Date(2022, 1, 1),
+          title: 'Mock post',
+        }),
+      );
 
-      await expect(result).rejects.toThrow(ValidationException);
+      // Act
+      await deletePostCommand({ id: '907b0a0b-9a12-4073-ab27-3ad5927955e9' });
+
+      // Assert
+      expect(postsRepository.delete).toHaveBeenCalledTimes(1);
     });
   });
 });
