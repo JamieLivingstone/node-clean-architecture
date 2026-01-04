@@ -29,14 +29,14 @@ jobs:
         run: cp .env.example .env
 
       - name: Start functional tests container
-        run: docker-compose up -d
+        run: docker compose up -d
 
       - name: Test
         run: npm test -- --coverage
 
       - name: Stop functional tests container
         if: always()
-        run: docker-compose -f "docker-compose.yml" down
+        run: docker compose down
 
       - name: Publish code coverage to Code Climate
         if: ${{ github.ref == 'refs/heads/main' }}
