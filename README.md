@@ -1,76 +1,117 @@
-# Clean Architecture Template
+# Node Clean Architecture
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/JamieLivingstone/node-clean-architecture/blob/main/LICENSE)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/f2520d575fe754ae7032/test_coverage)](https://codeclimate.com/github/JamieLivingstone/node-clean-architecture/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/f2520d575fe754ae7032/maintainability)](https://codeclimate.com/github/JamieLivingstone/node-clean-architecture/maintainability)
 [![Known Vulnerabilities](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture/badge.svg)](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture)
 
-A Node template that follows the Clean Architecture principles and encourages established practices.
+A production-ready Node.js template following Clean Architecture principles with CQRS pattern, designed for scalability and maintainability.
 
-## Features
+---
 
-- TypeScript first
-- Dependency injection via Awilix
-- CQRS (Command Query Responsibility Segregation)
-- Automatic API documentation via Swagger
-- Built with scalability and performance in mind by using Fastify (see [benchmarks](https://www.fastify.io/benchmarks))
-- Built in logging with Pino
-- Comprehensive testing including unit and functional tests
-- Prisma ORM integration
+## ✨ Features
 
-## Getting Started
+- **TypeScript First** — Full TypeScript support with strict type checking
+- **Clean Architecture** — Clear separation between Domain, Application, Infrastructure, and Web layers
+- **CQRS Pattern** — Command Query Responsibility Segregation for scalable read/write operations
+- **Dependency Injection** — Awilix container for inversion of control
+- **High Performance** — Built on Fastify for maximum throughput ([benchmarks](https://www.fastify.io/benchmarks))
+- **Prisma ORM** — Type-safe database access with migrations
+- **API Documentation** — Auto-generated Swagger/OpenAPI docs
+- **Structured Logging** — JSON logging with Pino
+- **Comprehensive Testing** — Unit and functional test setup with Jest
 
-1. Install the latest [Node.js LTS](https://nodejs.org/en/)
-2. Install Docker and ensure that it is running
-3. Create .env file `cp .env.example .env`
-4. Install project dependencies by running `npm install`
-5. Start Docker (local Postgres instance) `docker-compose up -d`
-6. Create database `npx prisma migrate deploy`
-7. Start development server `npm run dev`
-8. Navigate to Swagger ([http://localhost:3000/api-docs](http://localhost:3000/api-docs))
+---
 
-## Scripts
+## 🚀 Getting Started
 
-**Build production bundle**
+### Prerequisites
+
+- [nvm](https://github.com/nvm-sh/nvm) (Node Version Manager)
+- [Docker](https://www.docker.com/) running locally
+
+### Installation
+
+1. Install Node.js via nvm
+   ```bash
+   nvm install
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+
+3. Create environment file
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Start PostgreSQL database
+   ```bash
+   docker compose up -d
+   ```
+
+5. Run database migrations
+   ```bash
+   npx prisma migrate deploy
+   ```
+
+6. Start development server
+   ```bash
+   npm run dev
+   ```
+
+7. Navigate to Swagger
+   **[http://localhost:3000/api-docs](http://localhost:3000/api-docs)**
+
+---
+
+## 📜 Scripts
+
+### Development
+
+```bash
+npm run dev       # Start dev server with hot reload
+npm run build     # Build for production
+```
+
+### Code Quality
+
+```bash
+npm run lint      # Check for lint and format issues
+npm run lint:fix  # Auto-fix lint and format issues
+npm run format    # Format code with Biome
+```
+
+### Testing
+
+```bash
+npm test                 # Run all tests
+npm run test:unit        # Run unit tests only
+npm run test:functional  # Run functional/API tests
+```
+
+### Database
+
+```bash
+npx prisma migrate deploy  # Apply pending migrations
+npx prisma migrate dev     # Create a new migration
+npx prisma studio          # Open database GUI
+```
+
+---
+
+## 📁 Project Structure
 
 ```
-npm run build
+src/
+├── domain/           # Core business entities (no external dependencies)
+├── application/      # Use cases organized as commands and queries
+├── infrastructure/   # Database, configuration, dependency injection
+└── web/              # Fastify routes and HTTP handling
 ```
 
-**Lint project (eslint)**
+---
 
-```
-npm run lint
-```
+## 📄 License
 
-**Start development server**
-
-```
-npm run dev
-```
-
-**Run all tests**
-
-```
-npm test
-```
-
-**Run unit tests**
-
-```
-npm run test:unit
-```
-
-**Run functional tests (API tests)**
-
-```
-npm run test:functional
-```
-
-## License
-
-[This project is licensed with the MIT license.](https://github.com/JamieLivingstone/node-clean-architecture/blob/main/LICENSE)
-
-## Credits
-
-The project's inspiration is [Jason Taylor's clean architecture template](https://github.com/jasontaylordev/CleanArchitecture) for C#.
+This project is licensed under the [MIT License](https://github.com/JamieLivingstone/node-clean-architecture/blob/main/LICENSE).

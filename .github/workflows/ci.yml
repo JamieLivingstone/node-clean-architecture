@@ -37,9 +37,3 @@ jobs:
       - name: Stop functional tests container
         if: always()
         run: docker compose down
-
-      - name: Publish code coverage to Code Climate
-        if: ${{ github.ref == 'refs/heads/main' }}
-        uses: paambaati/codeclimate-action@v3.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_REPORTER_ID }}
