@@ -1,10 +1,10 @@
+import { join } from 'node:path';
 import AutoLoad from '@fastify/autoload';
 import { diContainer, fastifyAwilixPlugin } from '@fastify/awilix';
 import Cors from '@fastify/cors';
 import Helmet from '@fastify/helmet';
 import { makeInfrastructureDependencies } from '@infrastructure/di';
-import { FastifyInstance } from 'fastify';
-import { join } from 'path';
+import type { FastifyInstance } from 'fastify';
 
 export default async function makeApp(fastify: FastifyInstance) {
   // Create a dependency injection container

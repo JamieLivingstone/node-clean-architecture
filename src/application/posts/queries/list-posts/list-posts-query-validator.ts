@@ -1,7 +1,7 @@
 import { ValidationException } from '@application/common/exceptions';
-import { ZodError, z } from 'zod';
+import { type ZodError, z } from 'zod';
 
-import { ListPostsQuery } from './list-posts-query';
+import type { ListPostsQuery } from './list-posts-query';
 
 export async function validate(query: ListPostsQuery) {
   try {

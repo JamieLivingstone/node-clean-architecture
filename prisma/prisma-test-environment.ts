@@ -1,6 +1,6 @@
-import { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment';
-import { execSync } from 'child_process';
-import { randomUUID } from 'crypto';
+import { execSync } from 'node:child_process';
+import { randomUUID } from 'node:crypto';
+import type { EnvironmentContext, JestEnvironmentConfig } from '@jest/environment';
 import dotenv from 'dotenv';
 import NodeEnvironment from 'jest-environment-node';
 import { Client } from 'pg';

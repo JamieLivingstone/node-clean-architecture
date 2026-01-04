@@ -1,5 +1,5 @@
 import { ValidationException } from '@application/common/exceptions';
-import { FastifyError, FastifyErrorCodes, FastifyInstance } from 'fastify';
+import type { FastifyError, FastifyErrorCodes, FastifyInstance } from 'fastify';
 import fp from 'fastify-plugin';
 
 type ExceptionResponse = {

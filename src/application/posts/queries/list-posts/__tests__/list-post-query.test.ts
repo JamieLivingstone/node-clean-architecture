@@ -1,5 +1,5 @@
 import { ValidationException } from '@application/common/exceptions';
-import { PostsRepository } from '@application/common/interfaces';
+import type { PostsRepository } from '@application/common/interfaces';
 import { Post } from '@domain/entities';
 
 import { makeListPostsQuery } from '../list-posts-query';

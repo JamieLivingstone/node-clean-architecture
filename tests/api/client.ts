@@ -1,7 +1,7 @@
-import { Post } from '@domain/entities';
-import { Dependencies } from '@infrastructure/di';
+import { randomUUID } from 'node:crypto';
+import type { Post } from '@domain/entities';
+import type { Dependencies } from '@infrastructure/di';
 import app from '@web/app';
-import { randomUUID } from 'crypto';
 import Fastify from 'fastify';
 import supertest from 'supertest';
 

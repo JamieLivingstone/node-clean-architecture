@@ -1,7 +1,7 @@
 import { ValidationException } from '@application/common/exceptions';
-import { ZodError, z } from 'zod';
+import { type ZodError, z } from 'zod';
 
-import { CreatePostCommand } from './create-post-command';
+import type { CreatePostCommand } from './create-post-command';
 
 export async function validate(command: CreatePostCommand) {
   try {

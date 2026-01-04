@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@application/common/interfaces';
+import type { ApplicationConfig } from '@application/common/interfaces';
 import { z } from 'zod';
 
 export function makeConfig(): ApplicationConfig {

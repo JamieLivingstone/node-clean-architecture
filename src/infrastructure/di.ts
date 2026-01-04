@@ -1,7 +1,7 @@
-import * as Interfaces from '@application/common/interfaces';
+import type * as Interfaces from '@application/common/interfaces';
 import { makeConfig } from '@infrastructure/config';
 import { PrismaClient } from '@prisma/client';
-import { Resolver, asFunction, asValue } from 'awilix';
+import { asFunction, asValue, type Resolver } from 'awilix';
 
 import { makeLogger } from './logger';
 import * as repositories from './repositories';
