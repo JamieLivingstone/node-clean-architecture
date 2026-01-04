@@ -1,4 +1,4 @@
-import { Post } from '@domain/entities';
+import type { Post } from '@domain/entities';
 
 export interface PostsRepository {
   create(parameters: { post: Post }): Promise<{ id: string }>;

@@ -1,4 +1,4 @@
-import { Config } from '@jest/types';
+import type { Config } from '@jest/types';
 import dotenv from 'dotenv';
 import { pathsToModuleNameMapper } from 'ts-jest';
 

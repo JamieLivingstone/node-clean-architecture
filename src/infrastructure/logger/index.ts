@@ -1,4 +1,4 @@
-import { ApplicationConfig, Logger } from '@application/common/interfaces';
+import type { ApplicationConfig, Logger } from '@application/common/interfaces';
 import pino from 'pino';
 
 export function makeLogger(config: ApplicationConfig): Logger {

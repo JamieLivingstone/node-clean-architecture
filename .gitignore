@@ -8,3 +8,6 @@ npm-debug.log*
 # Editor files
 .idea/
 .vscode/
+
+# Claude Code
+.claude/settings.local.json

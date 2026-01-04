@@ -1,6 +1,6 @@
-import { PostsRepository } from '@application/common/interfaces';
+import type { PostsRepository } from '@application/common/interfaces';
 import { Post } from '@domain/entities';
-import { Post as PostModel } from '@prisma/client';
+import type { Post as PostModel } from '@prisma/client';
 
 export function makePostsRepository({ db }: Dependencies): PostsRepository {
   return {
