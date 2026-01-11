@@ -1,17 +1,30 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  title     String
+model ShortenedUrl {
+  id          String    @id
+  originalUrl String
+  createdAt   DateTime  @default(now())
+  expiresAt   DateTime?
+
+  visits Visit[]
+
+  @@map("shortened_urls")
+}
+
+model Visit {
+  id             String   @id @default(uuid())
+  shortenedUrlId String
+  visitedAt      DateTime @default(now())
+  referrer       String?
+
+  shortenedUrl ShortenedUrl @relation(fields: [shortenedUrlId], references: [id])
+
+  @@index([shortenedUrlId, visitedAt])
+  @@map("visits")
 }
