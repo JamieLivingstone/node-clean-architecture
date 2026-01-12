@@ -1,7 +1,7 @@
 # -----------------------
 # Build Stage
 # -----------------------
-FROM node:24-slim AS builder
+FROM node:24-alpine AS builder
 
 ENV NODE_ENV=production
 
@@ -12,10 +12,14 @@ COPY package*.json ./
 COPY prisma ./prisma
 
 # Install all dependencies (including devDeps for build)
-RUN npm ci --include=dev
+# Skip scripts to avoid lefthook/git requirement
+RUN npm ci --include=dev --ignore-scripts
 
 # Copy the full source tree
 COPY . .
+
+# Generate Prisma client (needs dotenv from devDeps)
+RUN npx prisma generate --config prisma/prisma.config.ts
 
 # Build TypeScript
 RUN npm run build
@@ -23,26 +27,30 @@ RUN npm run build
 # -----------------------
 # Production Stage
 # -----------------------
-FROM node:24-slim AS runner
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
-# Create and use a non-root user
-RUN useradd -m -r -s /bin/bash nodejs
-
 # Copy only what's needed for runtime
 COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/prisma ./prisma
-RUN npm ci --omit=dev && \
-    npx prisma generate --config prisma/prisma.config.ts && \
+
+# Install production dependencies only
+RUN npm ci --omit=dev --ignore-scripts && \
     npm cache clean --force
+
+# Copy Prisma schema and generated client from builder
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma/client ./node_modules/@prisma/client
 
 # Copy built artifacts
 COPY --from=builder /app/dist ./dist
 
-# Set ownership
-RUN chown -R nodejs:nodejs /app
-USER nodejs
+# Set ownership to node user (built-in to Alpine image)
+RUN chown -R node:node /app
+
+# Switch to non-root user
+USER node
 
 # Set environment
 ENV NODE_ENV=production

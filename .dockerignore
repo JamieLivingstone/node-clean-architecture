@@ -1,6 +1,44 @@
-.github
-.husky
+# Dependencies
 node_modules
 npm-debug.log
+yarn-error.log
+
+# Tests
 tests
 **/__tests__
+coverage
+*.test.ts
+
+# Git
+.git
+.github
+.gitignore
+
+# Development
+.husky
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Build artifacts (will be generated in container)
+dist
+
+# Documentation
+*.md
+!README.md
+
+# CI/CD
+.gitlab-ci.yml
+.travis.yml
+Dockerfile
+.dockerignore
+
+# Misc
+.DS_Store

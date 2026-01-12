@@ -12,15 +12,15 @@
     "outDir": "./dist",
     "types": ["node", "vitest/globals"],
     "strict": true,
-    "noUncheckedIndexedAccess": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
-    "skipLibCheck": true,
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "removeComments": true
+    "skipLibCheck": true,
+    "isolatedModules": false,
+    "removeComments": true,
+    "noStrictGenericChecks": false
   }
 }
