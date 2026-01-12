@@ -34,8 +34,11 @@ jobs:
       - name: Create .env file
         run: cp .env.example .env
 
-      - name: Start functional tests container
+      - name: Start container
         run: docker compose up -d
+
+      - name: Wait for database to be ready
+        run: docker compose exec -T db sh -c 'until pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-app_db}; do sleep 1; done'
 
       - name: Test
         run: npm test -- --coverage
