@@ -1,34 +1,44 @@
-import type * as Interfaces from '@application/common/interfaces';
-import { makeConfig } from '@infrastructure/config';
+import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
-import { asFunction, asValue, type Resolver } from 'awilix';
-
+import { makeConfig } from './config';
 import { makeLogger } from './logger';
-import * as repositories from './repositories';
+import { makeShortenedUrlsRepository } from './repositories/shortened-urls-repository';
+import { makeVisitsRepository } from './repositories/visits-repository';
 
-export type Dependencies = {
-  config: Interfaces.ApplicationConfig;
-  db: PrismaClient;
-  logger: Interfaces.Logger;
-  postsRepository: Interfaces.PostsRepository;
-};
-
-export function makeInfrastructureDependencies(): {
-  [dependency in keyof Dependencies]: Resolver<Dependencies[dependency]>;
-} {
+export async function makeDependencies() {
   const config = makeConfig();
   const logger = makeLogger(config);
-  const db = new PrismaClient();
-
-  db.$connect().catch(() => {
-    logger.error({ detail: 'Failed to establish a connection to the database!' });
-    process.exit(1);
+  const adapter = new PrismaPg({ connectionString: config.DATABASE_URL });
+  const db = new PrismaClient({
+    adapter,
+    log: [
+      { level: 'error', emit: 'event' },
+      { level: 'warn', emit: 'event' },
+    ],
   });
 
+  db.$on('error', (e) => logger.error({ target: e.target, message: e.message }, 'Prisma error'));
+  db.$on('warn', (e) => logger.warn({ target: e.target, message: e.message }, 'Prisma warning'));
+
+  await db.$connect();
+
+  const shortenedUrlsRepository = makeShortenedUrlsRepository(db);
+  const visitsRepository = makeVisitsRepository(db);
+
   return {
-    config: asValue(config),
-    db: asValue(db),
-    logger: asValue(logger),
-    postsRepository: asFunction(repositories.makePostsRepository).singleton(),
+    config,
+    db,
+    logger,
+    repositories: {
+      shortenedUrlsRepository,
+      visitsRepository,
+    },
+    dispose: async () => {
+      await db.$disconnect();
+    },
   };
 }
+
+export type Dependencies = Awaited<ReturnType<typeof makeDependencies>>;
+
+export type UseCaseDependencies = Pick<Dependencies, 'logger' | 'repositories'>;

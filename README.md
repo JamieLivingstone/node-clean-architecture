@@ -3,21 +3,19 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/JamieLivingstone/node-clean-architecture/blob/main/LICENSE)
 [![Known Vulnerabilities](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture/badge.svg)](https://snyk.io/test/github/JamieLivingstone/node-clean-architecture)
 
-A production-ready Node.js template following Clean Architecture principles with CQRS pattern, designed for scalability and maintainability.
+A production-ready Node.js template following Clean Architecture principles, designed for scalability and maintainability.
 
 ---
 
 ## ✨ Features
 
-- **TypeScript First** — Full TypeScript support with strict type checking
-- **Clean Architecture** — Clear separation between Domain, Application, Infrastructure, and Web layers
-- **CQRS Pattern** — Command Query Responsibility Segregation for scalable read/write operations
-- **Dependency Injection** — Awilix container for inversion of control
+- **Modern Stack** — Fastify, Prisma, Zod, Vitest, Biome, and TypeScript
 - **High Performance** — Built on Fastify for maximum throughput ([benchmarks](https://www.fastify.io/benchmarks))
-- **Prisma ORM** — Type-safe database access with migrations
-- **API Documentation** — Auto-generated Swagger/OpenAPI docs
-- **Structured Logging** — JSON logging with Pino
-- **Comprehensive Testing** — Unit and functional test setup with Jest
+- **Type Safe** — Strict TypeScript with runtime validation via Zod
+- **Database Ready** — Prisma ORM with migrations and type-safe queries
+- **API Documentation** — Auto-generated Swagger/OpenAPI from route schemas
+- **Production Ready** — Structured logging, rate limiting, security headers, health checks
+- **Test First** — Unit and integration testing with isolated database schemas
 
 ---
 
@@ -30,9 +28,10 @@ A production-ready Node.js template following Clean Architecture principles with
 
 ### Installation
 
-1. Install Node.js via nvm
+1. Install and use Node.js via nvm
    ```bash
    nvm install
+   nvm use
    ```
 
 2. Install dependencies
@@ -52,15 +51,20 @@ A production-ready Node.js template following Clean Architecture principles with
 
 5. Run database migrations
    ```bash
-   npx prisma migrate deploy
+   npx prisma migrate deploy --config prisma/prisma.config.ts
    ```
 
-6. Start development server
+6. Generate Prisma client
+   ```bash
+   npx prisma generate --config prisma/prisma.config.ts
+   ```
+
+7. Start development server
    ```bash
    npm run dev
    ```
 
-7. Navigate to Swagger
+8. Navigate to Swagger
    **[http://localhost:3000/api-docs](http://localhost:3000/api-docs)**
 
 ---
@@ -87,16 +91,30 @@ npm run format    # Format code with Biome
 ```bash
 npm test                 # Run all tests
 npm run test:unit        # Run unit tests only
-npm run test:functional  # Run functional/API tests
+npm run test:integration # Run integration tests
 ```
 
 ### Database
 
 ```bash
-npx prisma migrate deploy  # Apply pending migrations
-npx prisma migrate dev     # Create a new migration
-npx prisma studio          # Open database GUI
+npx prisma migrate deploy --config prisma/prisma.config.ts  # Apply pending migrations
+npx prisma migrate dev --config prisma/prisma.config.ts     # Create a new migration
+npx prisma studio --config prisma/prisma.config.ts          # Open database GUI
 ```
+
+---
+
+## 🏛️ Clean Architecture
+
+This template implements [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) principles:
+
+| Layer              | Purpose                                         | Dependencies           |
+|--------------------|-------------------------------------------------|------------------------|
+| **Domain**         | Business logic, entities, repository interfaces | None                   |
+| **Infrastructure** | Database, logging, external services            | Domain                 |
+| **Features**       | Use cases and HTTP controllers                  | Domain, Infrastructure |
+
+**The Dependency Rule**: Source code dependencies point inward. Domain knows nothing about infrastructure or HTTP.
 
 ---
 
@@ -104,10 +122,21 @@ npx prisma studio          # Open database GUI
 
 ```
 src/
-├── domain/           # Core business entities (no external dependencies)
-├── application/      # Use cases organized as commands and queries
-├── infrastructure/   # Database, configuration, dependency injection
-└── web/              # Fastify routes and HTTP handling
+├── domain/           # Core business logic (no dependencies)
+│   ├── entities/     # Domain models
+│   └── repositories/ # Repository interfaces
+├── infrastructure/   # External concerns
+│   ├── config/       # Environment configuration
+│   ├── logger/       # Structured logging
+│   ├── repositories/ # Repository implementations
+│   └── di.ts         # Dependency injection
+├── features/         # Application use cases
+│   └── {feature}/
+│       ├── {feature}-controller.ts  # HTTP routes
+│       └── {operation}.ts           # Business operations
+├── plugins/          # Fastify plugins
+├── app.ts            # Application setup
+└── server.ts         # Entry point
 ```
 
 ---

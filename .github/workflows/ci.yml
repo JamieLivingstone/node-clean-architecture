@@ -11,25 +11,34 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate --config prisma/prisma.config.ts
 
       - name: Lint
         run: npm run lint
 
+      - name: Build
+        run: npm run build
+
       - name: Create .env file
         run: cp .env.example .env
 
-      - name: Start functional tests container
+      - name: Start container
         run: docker compose up -d
+
+      - name: Wait for database to be ready
+        run: docker compose exec -T db sh -c 'until pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-app_db}; do sleep 1; done'
 
       - name: Test
         run: npm test -- --coverage

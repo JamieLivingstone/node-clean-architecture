@@ -3,25 +3,24 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@application/*": ["src/application/*"],
       "@domain/*": ["src/domain/*"],
-      "@infrastructure/*": ["src/infrastructure/*"],
-      "@web/*": ["src/web/*"]
+      "@infrastructure/*": ["src/infrastructure/*"]
     },
     "target": "esnext",
     "lib": ["esnext"],
-    "module": "commonjs",
+    "module": "esnext",
     "outDir": "./dist",
-    "typeRoots": ["./node_modules/@types", "types"],
+    "types": ["node", "vitest/globals"],
     "strict": true,
+    "noUncheckedIndexedAccess": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
-    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "isolatedModules": false,
-    "removeComments": true,
-    "noStrictGenericChecks": false
+    "isolatedModules": true,
+    "removeComments": true
   }
 }
